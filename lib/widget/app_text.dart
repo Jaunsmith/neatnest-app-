@@ -27,6 +27,10 @@ Widget secondaryText({
   return Text(
     text,
     textAlign: textAlign,
-    style: TextStyle(color: color, fontSize: fontSize ?? 14.sp),
+    style: TextStyle(
+      color: color,
+      fontSize: fontSize ?? 14.sp,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }

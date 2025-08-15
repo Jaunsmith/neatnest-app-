@@ -1,11 +1,14 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/onboarding/widgets/index_state.dart';
 import 'package:neat_nest/screens/onboarding/widgets/introduction_screens.dart';
+import 'package:neat_nest/utilities/app_data.dart';
+import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
@@ -25,11 +28,6 @@ class WelcomeScreen extends ConsumerWidget {
     ),
   ];
 
-  final List<String> imagePath = [
-    'https://cdn.prod.website-files.com/662a9a0b1860cf22db41bd69/662ff7377dec6027e008a4ac_Professional%20cleaning%20service%20(1).webp',
-    'https://media.istockphoto.com/id/906777508/photo/portrait-of-diverse-janitors.jpg?s=612x612&w=0&k=20&c=egjW49zTzRtNqvq1tCVYzmxq8SJW4GK0dRGaJ7aet90=',
-  ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int index = ref.watch(indexStateProvider);
@@ -40,13 +38,15 @@ class WelcomeScreen extends ConsumerWidget {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
-            Container(
+            SizedBox(
               height: 500,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(imagePath[index]),
-                ),
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: AppData.imagePathWelcome[index],
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator.adaptive()),
+                errorWidget: (context, url, error) =>
+                    Icon(Icons.error, color: Colors.red, size: 30),
               ),
             ),
             Positioned(
@@ -87,7 +87,6 @@ class WelcomeScreen extends ConsumerWidget {
                   ),
                 ),
                 onTap: (value) {
-                  debugPrint("the index number is $value");
                   ref.read(indexStateProvider.notifier).indexUpdate(value);
                 },
               ),
@@ -103,7 +102,12 @@ class WelcomeScreen extends ConsumerWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        debugPrint("routing to homepage");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BottomNavigationScreen(),
+                          ),
+                        );
                       },
                       child: primaryText(
                         text: 'skip',
@@ -119,6 +123,12 @@ class WelcomeScreen extends ConsumerWidget {
                         } else {
                           debugPrint(
                             "The home page from the welcome screen us clicked",
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavigationScreen(),
+                            ),
                           );
                         }
                       },

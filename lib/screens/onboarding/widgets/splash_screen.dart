@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Text(
               'Neat',
-              style: TextStyle(color: AppColors.primaryTextColor, fontSize: 22),
+              style: TextStyle(color: AppColors.blackTextColor, fontSize: 22),
             ),
             Text(
               'Nest',
