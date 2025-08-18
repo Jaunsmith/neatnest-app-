@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
+import 'package:neat_nest/screens/history/widget%20/history_data.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
@@ -80,12 +81,12 @@ class _HistoryScreenState extends State<HistoryScreen>
                 ),
               ],
             ),
-            20.ht,
+            30.ht,
             Expanded(
               child: TabBarView(
                 controller: _controller,
                 children: [
-                  Center(child: Text('Ongoing content')),
+                  HistoryData(),
                   Center(child: Text('Completed content')),
                   Center(child: Text('Cancelled content')),
                 ],
