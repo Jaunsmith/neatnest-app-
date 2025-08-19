@@ -3,23 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utilities/data_screen.dart';
 
-class HistoryData extends StatefulWidget {
-  const HistoryData({super.key});
+class CompletedHistory extends StatelessWidget {
+  const CompletedHistory({super.key});
 
-  @override
-  State<HistoryData> createState() => _HistoryDataState();
-}
-
-class _HistoryDataState extends State<HistoryData> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150.h,
       child: ListView.builder(
-        itemCount: 2,
+        itemCount: 3,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return DataScreen();
+          return DataScreen(
+            text1: 'Leave Review',
+            text2: 'Re-Book',
+            index: index,
+          );
         },
       ),
     );

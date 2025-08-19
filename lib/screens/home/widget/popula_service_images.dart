@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utilities/constant/colors.dart';
+
 class PopulaServiceImages extends StatelessWidget {
   const PopulaServiceImages({super.key, required this.imagePath});
 
@@ -14,7 +16,7 @@ class PopulaServiceImages extends StatelessWidget {
       margin: EdgeInsets.only(left: 10.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
-        color: Colors.grey.withOpacity(0.1),
+        color: AppColors.containerLightBackground,
       ),
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
-import 'package:neat_nest/screens/history/widget%20/history_data.dart';
+import 'package:neat_nest/screens/history/widget%20/completed_history.dart';
+import 'package:neat_nest/screens/history/widget%20/ongoing_history.dart';
+import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
+
+import '../../utilities/bottom_nav/widget/bottom_nav_notifiers.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -39,7 +44,22 @@ class _HistoryScreenState extends State<HistoryScreen>
         appBar: AppBar(
           backgroundColor: Colors.white,
           title: primaryText(text: 'MY Booking'),
-          leading: AppBarIcon(icons: Icons.arrow_back),
+          leading: Consumer(
+            builder: (context, ref, _) {
+              return AppBarIcon(
+                icons: Icons.arrow_back,
+                function: () {
+                  ref.read(bottomNavNotifiersProvider.notifier).indexUpdate(0);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavigationScreen(),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,8 +106,8 @@ class _HistoryScreenState extends State<HistoryScreen>
               child: TabBarView(
                 controller: _controller,
                 children: [
-                  HistoryData(),
-                  Center(child: Text('Completed content')),
+                  OngoingHistory(),
+                  CompletedHistory(),
                   Center(child: Text('Cancelled content')),
                 ],
               ),

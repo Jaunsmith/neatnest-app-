@@ -15,6 +15,7 @@ class BottomNavigationScreen extends ConsumerWidget {
     Center(child: Text('ITEMS 4')),
     Center(child: Text('ITEMS 5')),
   ];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(bottomNavNotifiersProvider);
