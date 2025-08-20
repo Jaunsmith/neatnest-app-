@@ -8,12 +8,14 @@ import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 
+import '../../../utilities/app_data.dart';
 import '../../../widget/app_text.dart';
 import '../utilities/app_bar_icon.dart';
 
 class ElectronicReceiptScreen extends StatelessWidget {
-  const ElectronicReceiptScreen({super.key});
+  const ElectronicReceiptScreen({super.key, required this.index});
 
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +52,7 @@ class ElectronicReceiptScreen extends StatelessWidget {
                       20.ht,
                       BarcodeWidget(
                         padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
-                        data: 'Home Cleaning',
+                        data: AppData.serviceName[index],
                         drawText: false,
                         barcode: Barcode.code128(),
                         width: double.maxFinite,
@@ -67,12 +69,12 @@ class ElectronicReceiptScreen extends StatelessWidget {
                         children: [
                           textHolder(
                             titleText: 'Service Name',
-                            text: 'Home cleaning',
+                            text: AppData.serviceName[index],
                           ),
                           20.ht,
                           textHolder(
                             titleText: 'Service Provider',
-                            text: 'David Palmer',
+                            text: AppData.serviceProviderName[index],
                           ),
                           20.ht,
                           textHolder(
@@ -97,13 +99,16 @@ class ElectronicReceiptScreen extends StatelessWidget {
                       20.ht,
                       Column(
                         children: [
-                          textHolder(titleText: 'Amount', text: '\$4,800'),
+                          textHolder(
+                            titleText: 'Amount',
+                            text: '\$${AppData.price[index]}',
+                          ),
                           20.ht,
                           textHolder(titleText: 'Tax & Fee', text: '1.25'),
                           20.ht,
                           textHolder(
                             titleText: 'Total Amount',
-                            text: '\$4,801.25',
+                            text: '\$${AppData.price[index] + 1.25}',
                           ),
                           20.ht,
                           textHolderPayment(

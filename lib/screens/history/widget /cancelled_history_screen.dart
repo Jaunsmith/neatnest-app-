@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neat_nest/screens/history/widget%20/electronic_reciept_screen.dart';
-import 'package:neat_nest/utilities/app_data.dart';
+import 'package:neat_nest/screens/history/utilities/re_book_screen.dart';
 
+import '../../../utilities/app_data.dart';
 import '../utilities/data_screen.dart';
 
-class OngoingHistory extends StatefulWidget {
-  const OngoingHistory({super.key});
+class CancelledHistoryScreen extends StatelessWidget {
+  const CancelledHistoryScreen({super.key});
 
-  @override
-  State<OngoingHistory> createState() => _OngoingHistoryState();
-}
-
-class _OngoingHistoryState extends State<OngoingHistory> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 150.h,
       child: ListView.builder(
-        itemCount: AppData.imagePathway.length,
+        itemCount: 3,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return DataScreen(
-            text1: 'Cancel',
-            text2: 'E-Receipt',
+            text1: 'Delete',
+            text2: 'Re-Book',
             index: index,
-            nextPage: ElectronicReceiptScreen(index: index),
+            nextPage: ReBookScreen(),
             serviceName: AppData.serviceName[index],
             serviceProvider: AppData.serviceProviderName[index],
             imagePath: AppData.imagePathway[index],

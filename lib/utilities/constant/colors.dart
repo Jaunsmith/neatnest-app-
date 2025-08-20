@@ -5,4 +5,5 @@ class AppColors {
   static const Color blackTextColor = Color(0xFF090909);
   static const Color secondaryTextColor = Color(0xFF999A9B);
   static const Color containerLightBackground = Color(0xFFF9FAFF);
+  static const Color ratingStarColor = Color(0xFFE8B422);
 }

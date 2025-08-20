@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
-import 'package:neat_nest/screens/history/widget%20/cancelled_history_screen.dart';
-import 'package:neat_nest/screens/history/widget%20/completed_history.dart';
-import 'package:neat_nest/screens/history/widget%20/ongoing_history.dart';
-import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
-import 'package:neat_nest/utilities/constant/colors.dart';
+import 'package:neat_nest/screens/favorite/widgets/all_data_screen.dart';
+import 'package:neat_nest/screens/favorite/widgets/cleaning_data_screen.dart';
+import 'package:neat_nest/screens/favorite/widgets/plumbing_data_screen.dart';
+import 'package:neat_nest/screens/favorite/widgets/repairing_data_screen.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
-import 'package:neat_nest/widget/app_text.dart';
 
+import '../../utilities/bottom_nav/bottom_navigation_screen.dart';
 import '../../utilities/bottom_nav/widget/bottom_nav_notifiers.dart';
+import '../../utilities/constant/colors.dart';
+import '../../widget/app_text.dart';
+import '../history/utilities/app_bar_icon.dart';
 
-class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({super.key});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen>
+class _FavoriteScreenState extends State<FavoriteScreen>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 3, vsync: this);
+    _controller = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -44,7 +45,7 @@ class _HistoryScreenState extends State<HistoryScreen>
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: primaryText(text: 'MY Booking'),
+          title: primaryText(text: 'Favorite'),
           leading: Consumer(
             builder: (context, ref, _) {
               return AppBarIcon(
@@ -80,24 +81,37 @@ class _HistoryScreenState extends State<HistoryScreen>
               ),
               tabs: [
                 Text(
-                  'Ongoing',
+                  'All',
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  'Completed',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+                FittedBox(
+                  child: Text(
+                    'Cleaning',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Text(
-                  'Cancelled',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+                FittedBox(
+                  child: Text(
+                    'Repairing',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  child: Text(
+                    'Plumbing',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -107,9 +121,10 @@ class _HistoryScreenState extends State<HistoryScreen>
               child: TabBarView(
                 controller: _controller,
                 children: [
-                  OngoingHistory(),
-                  CompletedHistory(),
-                  CancelledHistoryScreen(),
+                  AllDataScreen(),
+                  CleaningDataScreen(),
+                  RepairingDataScreen(),
+                  PlumbingDataScreen(),
                 ],
               ),
             ),

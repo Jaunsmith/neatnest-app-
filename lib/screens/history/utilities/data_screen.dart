@@ -3,7 +3,6 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:neat_nest/screens/history/widget%20/electronic_reciept_screen.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
@@ -15,11 +14,21 @@ class DataScreen extends StatelessWidget {
     required this.text1,
     required this.text2,
     this.index,
+    required this.nextPage,
+    required this.serviceName,
+    required this.serviceProvider,
+    required this.imagePath,
+    required this.price,
   });
 
   final String text1;
   final String text2;
   final int? index;
+  final Widget nextPage;
+  final String serviceName;
+  final String serviceProvider;
+  final String imagePath;
+  final double price;
   String date() {
     DateTime now = DateTime.now();
     String format = DateFormat(' EEEE,dd MMM,yyyy').format(now);
@@ -54,8 +63,7 @@ class DataScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl:
-                              'https://eliezergroup.com/wp-content/webp-express/webp-images/uploads/2019/09/shutterstock_406477204.jpg.webp',
+                          imageUrl: imagePath,
                         ),
                       ),
                     ),
@@ -63,9 +71,9 @@ class DataScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        primaryText(text: 'Home Cleaning'),
+                        primaryText(text: serviceName),
                         5.ht,
-                        secondaryText(text: 'David Palmer'),
+                        secondaryText(text: serviceProvider),
                       ],
                     ),
                   ],
@@ -87,7 +95,7 @@ class DataScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        primaryText(text: '\$1,600'),
+                        primaryText(text: '\$${price.toString()}'),
                         secondaryText(text: '/hour'),
                       ],
                     ),
@@ -121,9 +129,7 @@ class DataScreen extends StatelessWidget {
                         );
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => ElectronicReceiptScreen(),
-                          ),
+                          MaterialPageRoute(builder: (context) => nextPage),
                         );
                       },
                     ),

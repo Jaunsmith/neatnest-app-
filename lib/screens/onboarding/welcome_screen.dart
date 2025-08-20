@@ -6,28 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/onboarding/widgets/index_state.dart';
-import 'package:neat_nest/screens/onboarding/widgets/introduction_screens.dart';
 import 'package:neat_nest/utilities/app_data.dart';
 import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
 class WelcomeScreen extends ConsumerWidget {
-  WelcomeScreen({super.key});
-
-  final List<IntroductionScreens> introScreens = [
-    IntroductionScreens(
-      bigText: 'Professional Home Help, Right when you need it',
-      smallText:
-          'Get trusted home services at your convenience. From cleaning to repairs, we connect you with skilled professionals who arrive right when you need them making home care simple, reliable, and stress free',
-    ),
-    IntroductionScreens(
-      bigText: 'Pick a service , choose a time and we will render the rest ',
-      smallText:
-          'Easily schedule cleaning, repairs, or other home services at your convenience. Select what you need, set the time that works best for you, and let our professionals take care of everything while you relax',
-    ),
-  ];
-
+  const WelcomeScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int index = ref.watch(indexStateProvider);
@@ -72,11 +57,11 @@ class WelcomeScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            Positioned(top: 500, child: introScreens[index]),
+            Positioned(top: 500, child: AppData.introScreens[index]),
             Positioned(
               bottom: 130.h,
               child: DotsIndicator(
-                dotsCount: introScreens.length,
+                dotsCount: AppData.introScreens.length,
                 position: index.toDouble(),
                 decorator: DotsDecorator(
                   size: Size.square(9),
