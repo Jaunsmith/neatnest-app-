@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/favorite/favorite_screen.dart';
 import 'package:neat_nest/screens/history/history_screen.dart';
 import 'package:neat_nest/screens/home/home_screen.dart';
+import 'package:neat_nest/screens/user/user_screen.dart';
 import 'package:neat_nest/utilities/bottom_nav/widget/bottom_nav_notifiers.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 
@@ -14,7 +15,7 @@ class BottomNavigationScreen extends ConsumerWidget {
     HistoryScreen(),
     FavoriteScreen(),
     Center(child: Text('ITEMS 4')),
-    Center(child: Text('ITEMS 5')),
+    UserScreen(),
   ];
 
   @override
