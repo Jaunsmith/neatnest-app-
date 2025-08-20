@@ -24,12 +24,21 @@ class _OngoingHistoryState extends State<OngoingHistory> {
           return DataScreen(
             text1: 'Cancel',
             text2: 'E-Receipt',
-            index: index,
-            nextPage: ElectronicReceiptScreen(index: index),
             serviceName: AppData.serviceName[index],
             serviceProvider: AppData.serviceProviderName[index],
             imagePath: AppData.imagePathway[index],
             price: AppData.price[index],
+            function1: () {
+              debugPrint('The Cancel text is clicked of index: $index');
+            },
+            function2: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ElectronicReceiptScreen(index: index),
+                ),
+              );
+            },
           );
         },
       ),

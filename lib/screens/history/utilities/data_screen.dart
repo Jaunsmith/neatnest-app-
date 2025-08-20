@@ -13,22 +13,23 @@ class DataScreen extends StatelessWidget {
     super.key,
     required this.text1,
     required this.text2,
-    this.index,
-    required this.nextPage,
     required this.serviceName,
     required this.serviceProvider,
     required this.imagePath,
     required this.price,
+    required this.function1,
+    required this.function2,
   });
 
   final String text1;
   final String text2;
-  final int? index;
-  final Widget nextPage;
   final String serviceName;
   final String serviceProvider;
   final String imagePath;
   final double price;
+  final VoidCallback function1;
+  final VoidCallback function2;
+
   String date() {
     DateTime now = DateTime.now();
     String format = DateFormat(' EEEE,dd MMM,yyyy').format(now);
@@ -113,25 +114,13 @@ class DataScreen extends StatelessWidget {
                       text: text1,
                       bckColor: AppColors.primaryColor.withOpacity(0.1),
                       textColor: AppColors.blackTextColor,
-                      function: () {
-                        debugPrint(
-                          "The button clicked is of text $text1 and of index of number $index",
-                        );
-                      },
+                      function: function1,
                     ),
                     AppButton(
                       text: text2,
                       bckColor: AppColors.primaryColor,
                       textColor: Colors.white,
-                      function: () {
-                        debugPrint(
-                          "The button clicked is of text $text2 and of index of number $index",
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => nextPage),
-                        );
-                      },
+                      function: function2,
                     ),
                   ],
                 ),

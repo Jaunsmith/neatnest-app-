@@ -14,10 +14,10 @@ class AppBarIcon extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Container(
-        height: 50.h,
-        width: 50.w,
+        height: 40.h,
+        width: 40.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.r),
+          borderRadius: BorderRadius.circular(20.r),
           color: AppColors.containerLightBackground,
         ),
         child: Center(child: Icon(icons, color: AppColors.blackTextColor)),
