@@ -26,7 +26,7 @@ class _AppTextFieldState extends State<AppTextField> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
       child: TextField(
         decoration: InputDecoration(
-          fillColor: AppColors.secondaryTextColor.withOpacity(0.1),
+          fillColor: AppColors.containerLightBackground,
           filled: true,
           hintStyle: TextStyle(color: AppColors.secondaryTextColor),
           hintText: widget.hintText ?? '',

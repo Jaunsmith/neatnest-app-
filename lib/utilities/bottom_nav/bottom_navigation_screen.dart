@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/screens/favorite/favorite_screen.dart';
 import 'package:neat_nest/screens/history/history_screen.dart';
 import 'package:neat_nest/screens/home/home_screen.dart';
+import 'package:neat_nest/screens/message/messages_list_screen.dart';
 import 'package:neat_nest/screens/user/user_screen.dart';
 import 'package:neat_nest/utilities/bottom_nav/widget/bottom_nav_notifiers.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
@@ -12,10 +13,10 @@ class BottomNavigationScreen extends ConsumerWidget {
   const BottomNavigationScreen({super.key, this.yesData = false});
   final bool yesData;
   List<Widget> get screens => [
-    const HomeScreen(),
-    const HistoryScreen(),
-    const FavoriteScreen(),
-    const Center(child: Text('ITEMS 4')),
+    HomeScreen(),
+    HistoryScreen(),
+    FavoriteScreen(),
+    MessagesScreen(),
     UserScreen(isDataAvailable: yesData),
   ];
 

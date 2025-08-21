@@ -33,84 +33,82 @@ class UserProfileScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              30.ht,
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30.r,
-                    backgroundColor: AppColors.primaryColor,
-                    child: ClipOval(
-                      child: CachedNetworkImage(
-                        height: 60.r,
-                        width: 60.r,
-                        fit: BoxFit.cover,
-                        imageUrl: AppData.imagePathway[1],
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator.adaptive(
-                            backgroundColor: AppColors.primaryColor,
-                          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            30.ht,
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 30.r,
+                  backgroundColor: AppColors.primaryColor,
+                  child: ClipOval(
+                    child: CachedNetworkImage(
+                      height: 60.r,
+                      width: 60.r,
+                      fit: BoxFit.cover,
+                      imageUrl: AppData.imagePathway[1],
+                      placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: AppColors.primaryColor,
                         ),
-                        errorWidget: (context, url, error) =>
-                            Icon(Icons.person, color: Colors.white, size: 50.r),
                       ),
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.person, color: Colors.white, size: 50.r),
                     ),
                   ),
-                  20.wt,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      primaryText(text: 'Oladiti Yusuf'),
-                      secondaryText(text: 'oladiti1@gmail.com'),
-                    ],
-                  ),
-                ],
-              ),
-              30.ht,
-              DottedLine(
-                dashColor: AppColors.secondaryTextColor.withOpacity(0.5),
-              ),
-              30.ht,
-              RowDataHolder(
-                text: 'Edit Profile ',
-                icons: FontAwesomeIcons.pencil,
-                function: () {},
-              ),
-              20.ht,
-              RowDataHolder(
-                text: 'Manage Address',
-                icons: Icons.location_on_outlined,
-                function: () {},
-              ),
-              20.ht,
-              RowDataHolder(
-                text: 'Payment Methods',
-                icons: FontAwesomeIcons.creditCard,
-                function: () {},
-              ),
-              20.ht,
-              RowDataHolder(
-                text: 'My booking',
-                icons: Icons.calendar_month_outlined,
-                function: () {},
-              ),
-              20.ht,
-              RowDataHolder(
-                text: 'Settings',
-                icons: Icons.settings,
-                function: () {},
-              ),
-              20.ht,
-              RowDataHolder(
-                text: 'Help Center',
-                icons: FontAwesomeIcons.hireAHelper,
-                function: () {},
-              ),
-            ],
-          ),
+                ),
+                20.wt,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    primaryText(text: 'Oladiti Yusuf'),
+                    secondaryText(text: 'oladiti1@gmail.com'),
+                  ],
+                ),
+              ],
+            ),
+            30.ht,
+            DottedLine(
+              dashColor: AppColors.secondaryTextColor.withOpacity(0.5),
+            ),
+            30.ht,
+            RowDataHolder(
+              text: 'Edit Profile ',
+              icons: FontAwesomeIcons.pencil,
+              function: () {},
+            ),
+            20.ht,
+            RowDataHolder(
+              text: 'Manage Address',
+              icons: Icons.location_on_outlined,
+              function: () {},
+            ),
+            20.ht,
+            RowDataHolder(
+              text: 'Payment Methods',
+              icons: FontAwesomeIcons.creditCard,
+              function: () {},
+            ),
+            20.ht,
+            RowDataHolder(
+              text: 'My booking',
+              icons: Icons.calendar_month_outlined,
+              function: () {},
+            ),
+            20.ht,
+            RowDataHolder(
+              text: 'Settings',
+              icons: Icons.settings,
+              function: () {},
+            ),
+            20.ht,
+            RowDataHolder(
+              text: 'Help Center',
+              icons: FontAwesomeIcons.hireAHelper,
+              function: () {},
+            ),
+          ],
         ),
       ),
     );
