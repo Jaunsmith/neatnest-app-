@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 
 class SignInController {
   SignInController();
@@ -16,5 +17,21 @@ class SignInController {
     }
   }
 
-  void submitData() {}
+  void submitData(BuildContext context) {
+    String email;
+    String password;
+
+    email = emailController.text;
+    password = passwordController.text;
+    if (email.isEmpty || password.isEmpty) {
+      debugPrint("Please kindly provide valid login details");
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BottomNavigationScreen(yesData: true),
+        ),
+      );
+    }
+  }
 }

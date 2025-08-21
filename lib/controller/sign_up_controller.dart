@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 
 class SignUpController {
   SignUpController();
@@ -19,7 +20,7 @@ class SignUpController {
     }
   }
 
-  void testingData() {
+  void testingData(BuildContext context) {
     final String mail;
     final String password;
     final String confirmPassword;
@@ -34,6 +35,13 @@ class SignUpController {
 
     debugPrint(
       "The user name enter is $mail and the password entered is $password and the check value is $isChecked",
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BottomNavigationScreen(yesData: true),
+      ),
     );
   }
 }

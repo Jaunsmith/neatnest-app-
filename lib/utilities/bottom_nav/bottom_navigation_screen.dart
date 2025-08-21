@@ -9,13 +9,14 @@ import 'package:neat_nest/utilities/bottom_nav/widget/bottom_nav_notifiers.dart'
 import 'package:neat_nest/utilities/constant/colors.dart';
 
 class BottomNavigationScreen extends ConsumerWidget {
-  const BottomNavigationScreen({super.key});
-  final List<Widget> screens = const [
-    HomeScreen(),
-    HistoryScreen(),
-    FavoriteScreen(),
-    Center(child: Text('ITEMS 4')),
-    UserScreen(),
+  const BottomNavigationScreen({super.key, this.yesData = false});
+  final bool yesData;
+  List<Widget> get screens => [
+    const HomeScreen(),
+    const HistoryScreen(),
+    const FavoriteScreen(),
+    const Center(child: Text('ITEMS 4')),
+    UserScreen(isDataAvailable: yesData),
   ];
 
   @override

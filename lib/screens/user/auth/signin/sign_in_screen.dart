@@ -98,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: double.infinity,
                   fontSize: 18.sp,
                   function: () {
-                    _signInScreenController.submitData();
+                    _signInScreenController.submitData(context);
                   },
                 ),
                 30.ht,

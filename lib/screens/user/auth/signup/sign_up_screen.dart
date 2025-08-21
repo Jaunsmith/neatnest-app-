@@ -112,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   fontSize: 18.sp,
                   function: () {
-                    _signUpController.testingData();
+                    _signUpController.testingData(context);
                   },
                 ),
                 30.ht,
