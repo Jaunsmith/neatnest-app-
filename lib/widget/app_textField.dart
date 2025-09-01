@@ -8,11 +8,13 @@ class AppTextField extends StatefulWidget {
     this.hintText,
     this.iconSuffix,
     this.iconPrefix,
+    this.function,
   });
 
   final String? hintText;
   final IconData? iconSuffix;
   final IconData? iconPrefix;
+  final VoidCallback? function;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -31,7 +33,13 @@ class _AppTextFieldState extends State<AppTextField> {
           hintStyle: TextStyle(color: AppColors.secondaryTextColor),
           hintText: widget.hintText ?? '',
           suffixIcon: widget.iconSuffix != null
-              ? Icon(widget.iconSuffix, color: AppColors.secondaryTextColor)
+              ? GestureDetector(
+                  onTap: widget.function,
+                  child: Icon(
+                    widget.iconSuffix,
+                    color: AppColors.secondaryTextColor,
+                  ),
+                )
               : null,
           prefixIcon: widget.iconPrefix != null
               ? Icon(widget.iconPrefix, color: AppColors.secondaryTextColor)

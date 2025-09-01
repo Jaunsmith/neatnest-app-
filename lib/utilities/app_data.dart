@@ -24,7 +24,7 @@ class AppData {
   ];
   static const List<String> serviceName = [
     'Home Cleaning',
-    'Ac Repair',
+    'Repairing',
     'Garden Clearing',
   ];
   static const List<double> price = [1700, 500, 960];

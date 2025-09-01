@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neat_nest/screens/home/filter/filter_screen.dart';
 import 'package:neat_nest/screens/home/utilities/home_screen_index_state.dart';
 import 'package:neat_nest/screens/home/widget/home_screen_icons.dart';
 import 'package:neat_nest/screens/home/widget/popula_service_images.dart';
@@ -137,6 +138,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 hintText: 'Search...',
                 iconPrefix: Icons.search,
                 iconSuffix: Icons.menu,
+                function: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FilterScreen()),
+                  );
+                },
               ),
               10.ht,
               Expanded(
