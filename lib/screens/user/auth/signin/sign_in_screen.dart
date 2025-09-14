@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/controller/sign_in_controller.dart';
 import 'package:neat_nest/screens/user/auth/icon_holder.dart';
+import 'package:neat_nest/screens/user/auth/signin/forget_password_screen.dart';
 import 'package:neat_nest/screens/user/auth/signup/sign_up_screen.dart';
 import 'package:neat_nest/screens/user/utilities/auth_text_filed.dart';
 import 'package:neat_nest/utilities/app_button.dart';
@@ -49,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 5.ht,
-                Center(child: primaryText(text: 'Sign Up')),
+                Center(child: primaryText(text: 'Sign In')),
                 10.ht,
                 AuthTextFiled(
                   titleText: 'Email Address',
@@ -65,28 +66,44 @@ class _SignInScreenState extends State<SignInScreen> {
                   secure: true,
                   textEditingController:
                       _signInScreenController.passwordController,
-                  // textEditingController: controller!,
                 ),
                 10.ht,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Checkbox(
-                      checkColor: Colors.white,
-                      activeColor: AppColors.primaryColor,
-                      side: BorderSide(color: AppColors.primaryColor, width: 2),
-                      value: isChecked,
-                      onChanged: (val) {
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
-                        _signInScreenController.setChecked(val!);
-                      },
+                    Row(
+                      children: [
+                        Checkbox(
+                          checkColor: Colors.white,
+                          activeColor: AppColors.primaryColor,
+                          side: BorderSide(
+                            color: AppColors.primaryColor,
+                            width: 2,
+                          ),
+                          value: isChecked,
+                          onChanged: (val) {
+                            setState(() {
+                              isChecked = !isChecked;
+                            });
+                            _signInScreenController.setChecked(val!);
+                          },
+                        ),
+                        secondaryText(text: 'Remember me', fontSize: 13.sp),
+                      ],
                     ),
-                    secondaryText(text: 'I agree to the', fontSize: 13.sp),
-                    primaryText(
-                      text: 'Terms and Conditions',
-                      color: AppColors.primaryColor,
-                      fontSize: 13.sp,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgetPasswordScreen(),
+                          ),
+                        );
+                      },
+                      child: secondaryText(
+                        text: 'Forgot Password',
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ],
                 ),

@@ -31,6 +31,8 @@ dependencies:
   dotted_border: ^2.1.0
   barcode_widget: ^2.0.4
   syncfusion_flutter_sliders: ^30.2.7
+  email_validator: ^3.0.0
+  pin_code_fields: ^8.0.1
 #  dotted_border: ^3.1.0
 
 dev_dependencies:

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
@@ -25,6 +26,8 @@ class SignInController {
     password = passwordController.text;
     if (email.isEmpty || password.isEmpty) {
       debugPrint("Please kindly provide valid login details");
+    } else if (!EmailValidator.validate(email)) {
+      debugPrint("Please kindly enter a valid mail");
     } else {
       Navigator.push(
         context,
