@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:neat_nest/screens/booking/booking_form_screen.dart';
 import 'package:neat_nest/screens/booking/booking_review_holder.dart';
 import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
 import 'package:neat_nest/screens/home/widget/home_screen_icons.dart';
+import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/app_data.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
@@ -173,14 +175,42 @@ class BookingScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 100.h,
+                        height: 150.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 4,
+                          itemCount: 3,
                           itemBuilder: (context, index) {
-                            return BookingReviewHolder();
+                            return BookingReviewHolder(index: index);
                           },
                         ),
+                      ),
+                      15.ht,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              primaryText(text: "\$1,600"),
+                              secondaryText(text: "/hour", fontSize: 11.sp),
+                            ],
+                          ),
+                          AppButton(
+                            text: "Book now",
+                            verticalHeight: 12,
+                            fontSize: 14,
+                            bckColor: AppColors.primaryColor,
+                            textColor: Colors.white,
+                            function: () {
+                              debugPrint("Booking clicked");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BookingFormScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

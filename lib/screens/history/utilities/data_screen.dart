@@ -89,7 +89,9 @@ class DataScreen extends StatelessWidget {
                         primaryText(
                           text: date(),
                           fontSize: 10.sp,
-                          color: AppColors.blackTextColor.withOpacity(0.75),
+                          color: AppColors.blackTextColor.withValues(
+                            alpha: 0.75,
+                          ),
                         ),
                         secondaryText(text: 'Date'),
                       ],

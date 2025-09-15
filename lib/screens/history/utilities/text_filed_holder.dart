@@ -11,12 +11,16 @@ class TextFiledHolder extends StatelessWidget {
     this.hintText,
     this.textAlign,
     this.textStyle,
+    this.controller,
+    this.containerHeight,
   });
 
   final String titleText;
   final String? hintText;
   final TextAlign? textAlign;
   final TextStyle? textStyle;
+  final TextEditingController? controller;
+  final double? containerHeight;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +29,7 @@ class TextFiledHolder extends StatelessWidget {
         primaryText(text: titleText, fontSize: 12.sp),
         10.ht,
         Container(
-          height: 100.h,
+          height: containerHeight ?? 100.h,
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           width: double.infinity,
           decoration: BoxDecoration(
@@ -36,6 +40,7 @@ class TextFiledHolder extends StatelessWidget {
             expands: true,
             autofocus: false,
             showCursor: true,
+            controller: controller,
             style:
                 textStyle ??
                 TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),

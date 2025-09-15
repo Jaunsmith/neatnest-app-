@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
-import 'package:neat_nest/widget/app_text.dart';
 
-class AuthTextFiled extends StatefulWidget {
-  const AuthTextFiled({
+import '../../../utilities/constant/colors.dart';
+import '../../../widget/app_text.dart';
+
+class BookingTextField extends StatefulWidget {
+  const BookingTextField({
     super.key,
     required this.titleText,
-    required this.hintText,
-    this.secure = false,
     required this.textEditingController,
-    this.maxLine = 1,
-    this.containerHeight,
+    required this.hintText,
+    this.isIcon = false,
+    this.iconName,
   });
 
   final String titleText;
-  final String hintText;
-  final bool secure;
   final TextEditingController textEditingController;
-  final int? maxLine;
-  final double? containerHeight;
+  final String hintText;
+  final bool isIcon;
+  final IconData? iconName;
 
   @override
-  State<AuthTextFiled> createState() => _AuthTextFiledState();
+  State<BookingTextField> createState() => _BookingTextFieldState();
 }
 
-class _AuthTextFiledState extends State<AuthTextFiled> {
-  bool visible = true;
+class _BookingTextFieldState extends State<BookingTextField> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,15 +34,13 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
         primaryText(text: widget.titleText, fontSize: 14.sp),
         5.ht,
         Container(
-          height: widget.containerHeight?.h ?? 45.h,
+          height: 50.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r),
-            color: AppColors.textFieldBckColor.withOpacity(0.4),
+            color: AppColors.textFieldBckColor.withValues(alpha: 0.35),
           ),
           child: TextField(
             controller: widget.textEditingController,
-            keyboardType: TextInputType.multiline,
-            maxLines: widget.maxLine,
             style: TextStyle(
               color: AppColors.blackTextColor,
               fontWeight: FontWeight.bold,
@@ -52,19 +48,9 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
             decoration: InputDecoration(
               hintText: widget.hintText,
               hintStyle: TextStyle(color: AppColors.secondaryTextColor),
-              suffixIcon: !widget.secure
+              suffixIcon: !widget.isIcon
                   ? null
-                  : GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          visible = !visible;
-                        });
-                      },
-                      child: Icon(
-                        visible ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
+                  : GestureDetector(child: Icon(widget.iconName)),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.containerLightBackground,
@@ -78,12 +64,6 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
                 ),
               ),
             ),
-            obscureText: !widget.secure
-                ? false
-                : visible
-                ? true
-                : false,
-            obscuringCharacter: "*",
           ),
         ),
       ],

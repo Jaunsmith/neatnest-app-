@@ -70,7 +70,7 @@ class _AccountVerificationScreenState extends State<AccountVerificationScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    primaryText(text: "Dont\'s Receive Otp?", fontSize: 14.sp),
+                    primaryText(text: "Don't Receive Otp?", fontSize: 14.sp),
                     primaryText(
                       text: "Re-send Code",
                       fontSize: 13.sp,

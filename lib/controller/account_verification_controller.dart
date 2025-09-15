@@ -36,7 +36,7 @@ class AccountVerificationController {
     } else if (newPassword.length < 8) {
       debugPrint("Password must be more than 8 characters");
     } else if (newPassword != confirmNewPassword) {
-      debugPrint("Password don\'t match");
+      debugPrint("Password don't match");
     } else {
       Navigator.push(
         context,

@@ -5,14 +5,22 @@ import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
 class DateSelector extends StatefulWidget {
-  const DateSelector({super.key});
+  const DateSelector({super.key, required this.initialDate, this.onDatePicked});
+
+  final DateTime initialDate;
+  final ValueChanged<DateTime>? onDatePicked;
 
   @override
   State<DateSelector> createState() => _DateSelectorState();
 }
 
 class _DateSelectorState extends State<DateSelector> {
-  DateTime _pickedDate = DateTime.now();
+  late DateTime _pickedDate;
+  @override
+  void initState() {
+    _pickedDate = widget.initialDate;
+    super.initState();
+  }
 
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -25,6 +33,7 @@ class _DateSelectorState extends State<DateSelector> {
       setState(() {
         _pickedDate = picked;
       });
+      widget.onDatePicked?.call(picked);
     }
   }
 

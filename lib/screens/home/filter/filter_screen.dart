@@ -91,7 +91,7 @@ class FilterScreen extends ConsumerWidget {
               5.ht,
               primaryText(text: "Available Date"),
               5.ht,
-              DateSelector(),
+              DateSelector(initialDate: DateTime.now()),
               10.ht,
               primaryText(text: "Ratings"),
               5.ht,
