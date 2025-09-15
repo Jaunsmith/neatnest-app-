@@ -239,7 +239,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ],
                       ),
                       10.ht,
-                      Container(
+                      SizedBox(
                         height: 130.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
