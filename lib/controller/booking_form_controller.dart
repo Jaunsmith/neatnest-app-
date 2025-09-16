@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neat_nest/screens/booking/notifiers/booking_date_state.dart';
 import 'package:neat_nest/screens/booking/notifiers/booking_time_state.dart';
-import 'package:neat_nest/screens/history/history_screen.dart';
+import 'package:neat_nest/screens/booking/widgets/select_rooms.dart';
 
 class BookingFormController {
   BookingFormController();
@@ -32,7 +32,7 @@ class BookingFormController {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HistoryScreen()),
+        MaterialPageRoute(builder: (context) => SelectRooms()),
       );
     }
   }

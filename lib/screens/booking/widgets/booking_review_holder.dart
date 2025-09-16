@@ -5,7 +5,7 @@ import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
-import '../../utilities/app_data.dart';
+import '../../../utilities/app_data.dart';
 
 class BookingReviewHolder extends StatelessWidget {
   const BookingReviewHolder({super.key, required this.index});

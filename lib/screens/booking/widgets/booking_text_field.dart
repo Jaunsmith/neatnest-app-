@@ -8,18 +8,24 @@ import '../../../widget/app_text.dart';
 class BookingTextField extends StatefulWidget {
   const BookingTextField({
     super.key,
-    required this.titleText,
+    this.titleText,
     required this.textEditingController,
     required this.hintText,
-    this.isIcon = false,
+    this.isIconSuf = false,
+    this.isIconPre = false,
+    this.title = true,
     this.iconName,
+    this.iconNamePre,
   });
 
-  final String titleText;
+  final String? titleText;
   final TextEditingController textEditingController;
   final String hintText;
-  final bool isIcon;
+  final bool isIconSuf;
+  final bool isIconPre;
   final IconData? iconName;
+  final IconData? iconNamePre;
+  final bool title;
 
   @override
   State<BookingTextField> createState() => _BookingTextFieldState();
@@ -31,7 +37,9 @@ class _BookingTextFieldState extends State<BookingTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        primaryText(text: widget.titleText, fontSize: 14.sp),
+        ?widget.title
+            ? primaryText(text: widget.titleText ?? "", fontSize: 14.sp)
+            : null,
         5.ht,
         Container(
           height: 50.h,
@@ -48,9 +56,20 @@ class _BookingTextFieldState extends State<BookingTextField> {
             decoration: InputDecoration(
               hintText: widget.hintText,
               hintStyle: TextStyle(color: AppColors.secondaryTextColor),
-              suffixIcon: !widget.isIcon
+              suffixIcon: !widget.isIconSuf
                   ? null
-                  : GestureDetector(child: Icon(widget.iconName)),
+                  : GestureDetector(
+                      child: Icon(
+                        widget.iconName,
+                        color: AppColors.secondaryTextColor,
+                      ),
+                    ),
+              prefixIcon: !widget.isIconPre
+                  ? null
+                  : Icon(
+                      widget.iconNamePre,
+                      color: AppColors.secondaryTextColor,
+                    ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.containerLightBackground,

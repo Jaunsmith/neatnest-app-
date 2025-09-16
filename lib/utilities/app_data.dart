@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neat_nest/models/payment_method_model.dart';
+
+import '../models/address_adding_model.dart';
 import '../screens/onboarding/widgets/introduction_screens.dart';
 
 class AppData {
@@ -39,5 +44,23 @@ class AppData {
       smallText:
           'Easily schedule cleaning, repairs, or other home services at your convenience. Select what you need, set the time that works best for you, and let our professionals take care of everything while you relax',
     ),
+  ];
+  static List<AddressAddingModel> addList = [
+    AddressAddingModel(
+      title: "Home",
+      icon: Icons.apartment,
+      subTitle: "7421 Pacific Horizon Blvd, Honolulu, Hawaii 96825, USA",
+    ),
+    AddressAddingModel(
+      title: "House",
+      icon: Icons.home,
+      subTitle: "7421 Pacific Horizon Blvd, Honolulu, Hawaii 96825, USA",
+    ),
+  ];
+  static List<PaymentMethodModel> addPayment = [
+    PaymentMethodModel(title: "Cash", icon: FontAwesomeIcons.moneyBill1),
+    PaymentMethodModel(title: "PayPal", icon: FontAwesomeIcons.paypal),
+    PaymentMethodModel(title: "GooglePay", icon: FontAwesomeIcons.googlePay),
+    PaymentMethodModel(title: "ApplePay", icon: FontAwesomeIcons.applePay),
   ];
 }
