@@ -11,6 +11,7 @@ import 'package:neat_nest/utilities/constant/extension.dart';
 
 import '../../../widget/app_text.dart';
 import '../../history/utilities/app_bar_icon.dart';
+import 'add_card_screen.dart';
 
 class PaymentMethodScreen extends ConsumerWidget {
   const PaymentMethodScreen({super.key});
@@ -60,7 +61,15 @@ class PaymentMethodScreen extends ConsumerWidget {
               );
             }),
             20.ht,
-            DottedContainer(text: "Add new card"),
+            DottedContainer(
+              text: "Add new card",
+              function: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddCardScreen()),
+                );
+              },
+            ),
             50.ht,
             AppButton(
               text: "Continue",

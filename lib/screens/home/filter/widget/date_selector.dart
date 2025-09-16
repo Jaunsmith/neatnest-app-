@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
+import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
 class DateSelector extends StatefulWidget {
-  const DateSelector({super.key, required this.initialDate, this.onDatePicked});
+  const DateSelector({
+    super.key,
+    required this.initialDate,
+    this.onDatePicked,
+    this.dateFormatString,
+  });
 
   final DateTime initialDate;
   final ValueChanged<DateTime>? onDatePicked;
+  final String? dateFormatString;
 
   @override
   State<DateSelector> createState() => _DateSelectorState();
@@ -25,7 +32,7 @@ class _DateSelectorState extends State<DateSelector> {
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      firstDate: DateTime(1950),
+      firstDate: DateTime(1900),
       lastDate: DateTime(3000),
     );
 
@@ -50,8 +57,11 @@ class _DateSelectorState extends State<DateSelector> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           secondaryText(
-            text: DateFormat(' EEEE,dd MMM,yyyy').format(_pickedDate),
+            text: widget.dateFormatString != null
+                ? DateFormat(widget.dateFormatString).format(_pickedDate)
+                : DateFormat("EEEE,dd MMM,yyyy'").format(_pickedDate),
           ),
+          10.wt,
           GestureDetector(
             onTap: () {
               _pickDate(context);

@@ -35,7 +35,7 @@ Widget paymentMethodContainer({
               AppBarIcon(
                 icons: paymentMethod.icon,
                 function: () {},
-                iconColor: iconColor,
+                iconColor: AppColors.primaryColor,
                 bckColor: AppColors.primaryColor.withValues(alpha: 0.1),
               ),
               10.wt,
