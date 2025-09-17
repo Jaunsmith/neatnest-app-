@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neat_nest/screens/home/filter/filter_screen.dart';
 import 'package:neat_nest/screens/home/utilities/home_screen_index_state.dart';
 import 'package:neat_nest/screens/home/widget/home_screen_icons.dart';
+import 'package:neat_nest/screens/home/widget/notification_screen.dart';
 import 'package:neat_nest/screens/home/widget/popula_service_images.dart';
 import 'package:neat_nest/utilities/app_data.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
@@ -107,29 +108,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ],
                   ),
-                  Stack(
-                    children: [
-                      Icon(Icons.notifications_none),
-                      Positioned(
-                        left: 13.w,
-                        top: 1.h,
-                        child: Container(
-                          height: 10,
-                          width: 10,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(5.r),
-                          ),
-                          child: Center(
-                            child: secondaryText(
-                              text: '2',
-                              fontSize: 5,
-                              color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationScreen(),
+                        ),
+                      );
+                    },
+                    child: Stack(
+                      children: [
+                        Icon(Icons.notifications_none),
+                        Positioned(
+                          left: 13.w,
+                          top: 1.h,
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(5.r),
+                            ),
+                            child: Center(
+                              child: secondaryText(
+                                text: '2',
+                                fontSize: 5,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
