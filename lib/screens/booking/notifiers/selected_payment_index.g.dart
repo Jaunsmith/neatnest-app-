@@ -7,7 +7,7 @@ part of 'selected_payment_index.dart';
 // **************************************************************************
 
 String _$selectedPaymentIndexHash() =>
-    r'62d4e22e2c4040105612dfd980d2c86b34a6b140';
+    r'1d63e357b3dab25db113010b9bcbe5bdc60a446a';
 
 /// See also [SelectedPaymentIndex].
 @ProviderFor(SelectedPaymentIndex)
