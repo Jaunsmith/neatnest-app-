@@ -1,4 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/controller/sign_in_controller.dart';
@@ -40,6 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: Icon(Icons.arrow_back),
         ),
+        title: primaryText(text: 'Sign In'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,17 +52,23 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  5.ht,
-                  Center(child: primaryText(text: 'Sign In')),
-                  10.ht,
+                  20.ht,
                   AuthTextFiled(
                     titleText: 'Email Address',
                     hintText: 'Enter Email Address',
                     textEditingController:
                         _signInScreenController.emailController,
-                    // textEditingController: controller!,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email can't be empty";
+                      }
+                      if (!EmailValidator.validate(value)) {
+                        return "Please enter a valid mail";
+                      }
+                      return null;
+                    },
                   ),
-                  10.ht,
+                  20.ht,
                   AuthTextFiled(
                     titleText: 'Password',
                     hintText: 'Enter Password',
@@ -70,12 +78,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     onChanged: (value) {
                       searchServices(value);
                     },
-                    validator: (value){
-                      if(value == null || value.isEmpty){
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
                         return "This field cannot be empty";
                       }
-                      if(value.length < 3){
-                        return "Your password cannot be less than 3";
+                      if (value.length < 8) {
+                        return "Your password cannot be less than 8";
                       }
                       return null;
                     },
@@ -128,7 +136,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     width: double.infinity,
                     fontSize: 18.sp,
                     function: () {
-                      if(_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         _signInScreenController.submitData(context);
                       }
                     },

@@ -1,9 +1,6 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
-
-import '../widget/app_text.dart';
+import 'package:neat_nest/widget/error_notification.dart';
 
 class SignUpController {
   SignUpController();
@@ -19,9 +16,6 @@ class SignUpController {
 
   void setChecked(bool val) {
     isChecked = val;
-    if (kDebugMode) {
-      print('the value of val is:  $val');
-    }
   }
 
   void setRole(String value) {
@@ -40,30 +34,10 @@ class SignUpController {
     name = nameController.text;
     confirmPassword = confirmPasswordController.text;
 
-    if (mail.isEmpty ||
-        password.isEmpty ||
-        name.isEmpty ||
-        confirmPassword.isEmpty ||
-        role == null) {
-      debugPrint("Please kindly filled all field");
-    } else if (!EmailValidator.validate(mail)) {
-      debugPrint("Please Kindly enter a valid email address");
-    } else if (password.length < 8) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: primaryText(
-            text: "Password cant be less than 8 character",
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          elevation: 6,
-          duration: Duration(seconds: 1),
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(10.r),
-          // ),
-        ),
-      );
+    if (role == null || role!.isEmpty) {
+      showErrorMessage(context, "Please kindly select a role ");
+    } else if (!isChecked) {
+      showErrorMessage(context, "Please agree to the terms");
     } else {
       Navigator.push(
         context,

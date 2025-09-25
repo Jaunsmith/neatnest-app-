@@ -57,8 +57,9 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
           validator: widget.validator,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
+            errorStyle: TextStyle(fontWeight: FontWeight.bold),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide.none,
             ),
             filled: true,
@@ -79,16 +80,16 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
                     ),
                   ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide(color: Colors.red, width: 1),
             ),
 
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide(
                 color: AppColors.containerLightBackground,
                 width: 1,
