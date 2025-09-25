@@ -3,37 +3,44 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notification_state_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class NotificationStateNotifier extends _$NotificationStateNotifier {
   @override
   List<NotificationModel> build() {
-    return [
-      NotificationModel(
-        title: "Welcome!",
-        message: "Texting today fata for me 🎉",
-        datetime: DateTime.now(),
-      ),
-      NotificationModel(
-        title: "Offer",
-        message: "You got 20% discount!",
-        datetime: DateTime.now().subtract(Duration(hours: 5)),
-      ),
-      NotificationModel(
-        title: "Reminder",
-        message: "Your subscription expires soon.",
-        datetime: DateTime.now().subtract(Duration(days: 1)),
-      ),
-      NotificationModel(
-        title: "Update",
-        message: "New features are available.",
-        datetime: DateTime.now().subtract(Duration(days: 4)),
-      ),
-      NotificationModel(
-        title: "Update",
-        message: "New features are available.",
-        datetime: DateTime.now().subtract(Duration(days: 10)),
-      ),
-    ];
+    return [];
+  }
+
+  // this is used as a default data testing....
+  void defaultData() {
+    if (state.isEmpty) {
+      state = [
+        NotificationModel(
+          title: "Welcome!",
+          message: "Texting today fata for me 🎉",
+          datetime: DateTime.now(),
+        ),
+        NotificationModel(
+          title: "Offer",
+          message: "You got 20% discount!",
+          datetime: DateTime.now().subtract(Duration(hours: 5)),
+        ),
+        NotificationModel(
+          title: "Reminder",
+          message: "Your subscription expires soon.",
+          datetime: DateTime.now().subtract(Duration(days: 1)),
+        ),
+        NotificationModel(
+          title: "Update",
+          message: "New features are available.",
+          datetime: DateTime.now().subtract(Duration(days: 4)),
+        ),
+        NotificationModel(
+          title: "Update",
+          message: "New features are available.",
+          datetime: DateTime.now().subtract(Duration(days: 10)),
+        ),
+      ];
+    }
   }
 
   // ✅ Add new notification
@@ -63,5 +70,9 @@ class NotificationStateNotifier extends _$NotificationStateNotifier {
 
   void markAllAsRead() {
     state = [for (final n in state) n.copyWith(read: true)];
+  }
+
+  void emptyNotification() {
+    state = [];
   }
 }

@@ -4,15 +4,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:neat_nest/screens/home/notifier/notification_state_notifier.dart';
 import 'package:neat_nest/screens/home/utilities/notification_screen_holder.dart';
+import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 
 import '../../../models/notification_model.dart';
 import '../../../widget/app_text.dart';
 import '../../history/utilities/app_bar_icon.dart';
 
-class NotificationScreen extends ConsumerWidget {
+class NotificationScreen extends ConsumerStatefulWidget {
   const NotificationScreen({super.key});
 
+  @override
+  ConsumerState<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends ConsumerState<NotificationScreen> {
   Map<DateTime, List<NotificationModel>> groupNotifications(
     List<NotificationModel> notifications,
   ) {
@@ -31,6 +37,14 @@ class NotificationScreen extends ConsumerWidget {
     return grouped;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(notificationStateNotifierProvider.notifier).defaultData();
+    });
+  }
+
   String friendlyLabelFromKey(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -43,29 +57,62 @@ class NotificationScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final notification = ref.watch(notificationStateNotifierProvider);
     final groupedNotification = groupNotifications(notification);
     final keys = groupedNotification.keys.toList()
       ..sort((a, b) => b.compareTo(a));
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: primaryText(text: 'Notifications'),
-          centerTitle: false,
-          leading: AppBarIcon(
-            icons: Icons.arrow_back,
-            function: () {
-              Navigator.pop(context);
-            },
-          ),
-          actions: [AppBarIcon(icons: Icons.more_vert, function: () {})],
+        title: primaryText(text: 'Notifications'),
+        centerTitle: false,
+        leading: AppBarIcon(
+          icons: Icons.arrow_back,
+          function: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Column(
+        actions: [
+          PopupMenuButton(
+            color: Colors.white,
+            icon: AppBarIcon(icons: Icons.more_vert),
+            onSelected: (value) {
+              print(value);
+              if (value == "Mark All") {
+                ref
+                    .read(notificationStateNotifierProvider.notifier)
+                    .markAllAsRead();
+              }
+              if (value == "Delete All") {
+                ref
+                    .read(notificationStateNotifierProvider.notifier)
+                    .emptyNotification();
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(
+                value: "Delete All",
+                child: secondaryText(
+                  text: "Delete All",
+                  color: AppColors.blackTextColor,
+                ),
+              ),
+              PopupMenuItem(
+                value: "Mark All",
+                child: secondaryText(
+                  text: "Mark All",
+                  color: AppColors.blackTextColor,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
           children: [
             20.ht,
             Expanded(
