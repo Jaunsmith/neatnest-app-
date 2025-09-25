@@ -13,30 +13,27 @@ import '../../history/utilities/app_bar_icon.dart';
 class NotificationScreen extends ConsumerWidget {
   const NotificationScreen({super.key});
 
-  Map<String, List<NotificationModel>> groupNotifications(
+  Map<DateTime, List<NotificationModel>> groupNotifications(
     List<NotificationModel> notifications,
   ) {
-    final Map<String, List<NotificationModel>> grouped = {};
+    final Map<DateTime, List<NotificationModel>> grouped = {};
 
     for (var notif in notifications) {
       // convert to local date/time to avoid timezone issues
       final local = notif.datetime.toLocal();
 
-      // create a date-only key with ISO-like format for stable lexical sorting
+      // create a date-only so that it will be used as each group name...
       final dateOnly = DateTime(local.year, local.month, local.day);
-      final key = DateFormat('yyyy-MM-dd').format(dateOnly);
 
-      grouped.putIfAbsent(key, () => []).add(notif);
+      grouped.putIfAbsent(dateOnly, () => []).add(notif);
     }
 
     return grouped;
   }
 
-  String friendlyLabelFromKey(String key) {
-    final date = DateFormat('yyyy-MM-dd').parse(key);
+  String friendlyLabelFromKey(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final yesterday = today.subtract(const Duration(days: 1));
     final diffDays = today.difference(date).inDays;
 
     if (diffDays == 0) return 'Today';
@@ -92,12 +89,11 @@ class NotificationScreen extends ConsumerWidget {
                           final notif = items[index];
                           return GestureDetector(
                             onTap: () {
-                              final globalIndex = notification.indexOf(notif);
                               ref
                                   .read(
                                     notificationStateNotifierProvider.notifier,
                                   )
-                                  .markAsRead(globalIndex);
+                                  .markAsRead(notif.id);
                             },
                             child: NotificationScreenHolder(
                               title: notif.title,

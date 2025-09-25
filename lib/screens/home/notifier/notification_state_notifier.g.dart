@@ -7,7 +7,7 @@ part of 'notification_state_notifier.dart';
 // **************************************************************************
 
 String _$notificationStateNotifierHash() =>
-    r'37a437dbb74db4140d0b4d61c2dbcc33d5b3a00b';
+    r'1d4be744c6d83b021096dfbbf4fe811ea878aa2a';
 
 /// See also [NotificationStateNotifier].
 @ProviderFor(NotificationStateNotifier)

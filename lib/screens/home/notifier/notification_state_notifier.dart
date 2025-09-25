@@ -41,18 +41,24 @@ class NotificationStateNotifier extends _$NotificationStateNotifier {
     state = [...state, notif];
   }
 
-  void markAsRead(int index) {
+  void markAsRead(String id) {
+    // state = [
+    //   for (int i = 0; i < state.length; i++)
+    //     if (i == index) state[i].copyWith(read: true) else state[i],
+    // ]; this is used when using indexof...
     state = [
-      for (int i = 0; i < state.length; i++)
-        if (i == index) state[i].copyWith(read: true) else state[i],
+      for (final notif in state)
+        if (notif.id == id) notif.copyWith(read: true) else notif,
     ];
   }
 
-  void delete(int index) {
-    state = [
-      for (int i = 0; i < state.length; i++)
-        if (i != index) state[i],
-    ];
+  void delete(String id) {
+    // state = [
+    //   for (int i = 0; i < state.length; i++)
+    //     if (i != index)
+    //       state[i], // this work by checking the condition if it true included in the list and if false it not included in the list
+    // ];
+    state = state.where((n) => n.id != id).toList();
   }
 
   void markAllAsRead() {

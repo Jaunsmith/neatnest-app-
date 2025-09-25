@@ -21,6 +21,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late SignUpController _signUpController;
   bool isChecked = false;
 
+  final List<String> roles = const ["User", "Service Provider"];
+  String? position;
+
   @override
   void didChangeDependencies() {
     _signUpController = SignUpController();
@@ -63,6 +66,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText: 'Enter Email Address',
                   textEditingController: _signUpController.emailController,
                   // textEditingController: controller!,
+                ),
+                10.ht,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    primaryText(text: "Role", fontSize: 14.sp),
+                    5.ht,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5.h,
+                        horizontal: 10.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.textFieldBckColor.withValues(
+                          alpha: 0.3,
+                        ),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: DropdownButton(
+                        hint: secondaryText(text: "Select Role"),
+                        icon: Icon(Icons.keyboard_arrow_down_outlined),
+                        isExpanded: true,
+                        value: position,
+                        underline: SizedBox(),
+                        items: roles.map((role) {
+                          return DropdownMenuItem(
+                            value: role,
+                            child: secondaryText(text: role),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            setState(() {
+                              position = value;
+                            });
+                            _signUpController.setRole(value);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 10.ht,
                 AuthTextFiled(
