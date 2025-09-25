@@ -16,6 +16,8 @@ class AuthTextFiled extends StatefulWidget {
     this.containerHeight,
     this.textInputType,
     this.inputFormatter,
+    this.onChanged,
+    this.validator,
   });
 
   final String titleText;
@@ -26,6 +28,8 @@ class AuthTextFiled extends StatefulWidget {
   final double? containerHeight;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatter;
+  final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
 
   @override
   State<AuthTextFiled> createState() => _AuthTextFiledState();
@@ -33,6 +37,7 @@ class AuthTextFiled extends StatefulWidget {
 
 class _AuthTextFiledState extends State<AuthTextFiled> {
   bool visible = true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,57 +45,62 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
       children: [
         primaryText(text: widget.titleText, fontSize: 14.sp),
         5.ht,
-        Container(
-          height: widget.containerHeight?.h ?? 45.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            color: AppColors.textFieldBckColor.withValues(alpha: 0.3),
+        TextFormField(
+          controller: widget.textEditingController,
+          keyboardType: widget.textInputType ?? TextInputType.multiline,
+          maxLines: widget.maxLine,
+          inputFormatters: widget.inputFormatter,
+          style: TextStyle(
+            color: AppColors.blackTextColor,
+            fontWeight: FontWeight.bold,
           ),
-          child: TextField(
-            controller: widget.textEditingController,
-            keyboardType: widget.textInputType ?? TextInputType.multiline,
-            maxLines: widget.maxLine,
-            inputFormatters: widget.inputFormatter,
-            style: TextStyle(
-              color: AppColors.blackTextColor,
-              fontWeight: FontWeight.bold,
+          validator: widget.validator,
+          onChanged: widget.onChanged,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
-            decoration: InputDecoration(
-              hintText: widget.hintText,
-              hintStyle: TextStyle(color: AppColors.secondaryTextColor),
-              suffixIcon: !widget.secure
-                  ? null
-                  : GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          visible = !visible;
-                        });
-                      },
-                      child: Icon(
-                        visible ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.primaryColor,
-                      ),
+            filled: true,
+            fillColor: Colors.grey.shade200,
+            hintText: widget.hintText,
+            hintStyle: TextStyle(color: AppColors.secondaryTextColor),
+            suffixIcon: !widget.secure
+                ? null
+                : GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visible = !visible;
+                      });
+                    },
+                    child: Icon(
+                      visible ? Icons.visibility_off : Icons.visibility,
+                      color: AppColors.primaryColor,
                     ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.containerLightBackground,
-                  width: 2,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.containerLightBackground,
-                  width: 1,
-                ),
+                  ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.red, width: 1),
+            ),
+
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(
+                color: AppColors.containerLightBackground,
+                width: 1,
               ),
             ),
-            obscureText: !widget.secure
-                ? false
-                : visible
-                ? true
-                : false,
-            obscuringCharacter: "*",
           ),
+          obscureText: !widget.secure
+              ? false
+              : visible
+              ? true
+              : false,
+          obscuringCharacter: "*",
         ),
       ],
     );

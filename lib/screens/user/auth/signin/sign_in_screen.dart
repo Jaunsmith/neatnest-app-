@@ -21,7 +21,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   late SignInController _signInScreenController;
   bool isChecked = false;
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void didChangeDependencies() {
     _signInScreenController = SignInController();
@@ -30,137 +30,160 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back),
-          ),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                5.ht,
-                Center(child: primaryText(text: 'Sign In')),
-                10.ht,
-                AuthTextFiled(
-                  titleText: 'Email Address',
-                  hintText: 'Enter Email Address',
-                  textEditingController:
-                      _signInScreenController.emailController,
-                  // textEditingController: controller!,
-                ),
-                10.ht,
-                AuthTextFiled(
-                  titleText: 'Password',
-                  hintText: 'Enter Password',
-                  secure: true,
-                  textEditingController:
-                      _signInScreenController.passwordController,
-                ),
-                10.ht,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          activeColor: AppColors.primaryColor,
-                          side: BorderSide(
-                            color: AppColors.primaryColor,
-                            width: 2,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  5.ht,
+                  Center(child: primaryText(text: 'Sign In')),
+                  10.ht,
+                  AuthTextFiled(
+                    titleText: 'Email Address',
+                    hintText: 'Enter Email Address',
+                    textEditingController:
+                        _signInScreenController.emailController,
+                    // textEditingController: controller!,
+                  ),
+                  10.ht,
+                  AuthTextFiled(
+                    titleText: 'Password',
+                    hintText: 'Enter Password',
+                    secure: true,
+                    textEditingController:
+                        _signInScreenController.passwordController,
+                    onChanged: (value) {
+                      searchServices(value);
+                    },
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "This field cannot be empty";
+                      }
+                      if(value.length < 3){
+                        return "Your password cannot be less than 3";
+                      }
+                      return null;
+                    },
+                  ),
+                  10.ht,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                            checkColor: Colors.white,
+                            activeColor: AppColors.primaryColor,
+                            side: BorderSide(
+                              color: AppColors.primaryColor,
+                              width: 2,
+                            ),
+                            value: isChecked,
+                            onChanged: (val) {
+                              setState(() {
+                                isChecked = !isChecked;
+                              });
+                              _signInScreenController.setChecked(val!);
+                            },
                           ),
-                          value: isChecked,
-                          onChanged: (val) {
-                            setState(() {
-                              isChecked = !isChecked;
-                            });
-                            _signInScreenController.setChecked(val!);
-                          },
+                          secondaryText(text: 'Remember me', fontSize: 13.sp),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgetPasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: secondaryText(
+                          text: 'Forgot Password',
+                          color: AppColors.primaryColor,
                         ),
-                        secondaryText(text: 'Remember me', fontSize: 13.sp),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgetPasswordScreen(),
-                          ),
-                        );
-                      },
-                      child: secondaryText(
-                        text: 'Forgot Password',
-                        color: AppColors.primaryColor,
                       ),
-                    ),
-                  ],
-                ),
-                20.ht,
-                AppButton(
-                  text: 'Sign In',
-                  bckColor: AppColors.primaryColor,
-                  textColor: Colors.white,
-                  width: double.infinity,
-                  fontSize: 18.sp,
-                  function: () {
-                    _signInScreenController.submitData(context);
-                  },
-                ),
-                30.ht,
-                DottedLine(dashColor: AppColors.secondaryTextColor),
-                20.ht,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    iconHolder(
-                      imagePath:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWryx19r0yjTs-vYzgN8-moMYY9Kf4lWDqrg&s',
-                    ),
-                    20.wt,
-                    iconHolder(
-                      imagePath:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdP6AKFlNa3Afg4RJOp7OtR7RGRrlPE2KbLg&s',
-                    ),
-                  ],
-                ),
-                30.ht,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    secondaryText(text: 'Don\'t have and account?'),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpScreen(),
-                          ),
-                        );
-                      },
-                      child: secondaryText(
-                        text: 'SignUp',
-                        color: AppColors.primaryColor,
+                    ],
+                  ),
+                  20.ht,
+                  AppButton(
+                    text: 'Sign In',
+                    bckColor: AppColors.primaryColor,
+                    textColor: Colors.white,
+                    width: double.infinity,
+                    fontSize: 18.sp,
+                    function: () {
+                      if(_formKey.currentState!.validate()) {
+                        _signInScreenController.submitData(context);
+                      }
+                    },
+                  ),
+                  30.ht,
+                  DottedLine(dashColor: AppColors.secondaryTextColor),
+                  20.ht,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      iconHolder(
+                        imagePath:
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWryx19r0yjTs-vYzgN8-moMYY9Kf4lWDqrg&s',
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      20.wt,
+                      iconHolder(
+                        imagePath:
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdP6AKFlNa3Afg4RJOp7OtR7RGRrlPE2KbLg&s',
+                      ),
+                    ],
+                  ),
+                  30.ht,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      secondaryText(text: 'Don\'t have and account?'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignUpScreen(),
+                            ),
+                          );
+                        },
+                        child: secondaryText(
+                          text: 'SignUp',
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void searchServices(String value) {
+    ///Debouncer
+    Future.delayed(Duration(milliseconds: 2500), () {
+      //endpoint that will take in the string
+    });
   }
 }
