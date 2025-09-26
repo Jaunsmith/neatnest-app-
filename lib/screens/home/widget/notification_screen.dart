@@ -79,7 +79,6 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
             color: Colors.white,
             icon: AppBarIcon(icons: Icons.more_vert),
             onSelected: (value) {
-              print(value);
               if (value == "Mark All") {
                 ref
                     .read(notificationStateNotifierProvider.notifier)
