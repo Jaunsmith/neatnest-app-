@@ -26,7 +26,7 @@ class FilterState extends _$FilterState {
     state = (state ?? FilterSearchModel()).copyWith(minPrice: minPrice);
   }
 
-  void setRating(double? rating) {
+  void setRating(String? rating) {
     state = (state ?? FilterSearchModel()).copyWith(rating: rating);
   }
 

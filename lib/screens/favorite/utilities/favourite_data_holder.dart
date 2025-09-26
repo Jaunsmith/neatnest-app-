@@ -8,17 +8,26 @@ import 'package:neat_nest/utilities/constant/extension.dart';
 
 import '../../../widget/app_text.dart';
 
-class FavouriteDataHolder extends StatelessWidget {
+class FavouriteDataHolder extends StatefulWidget {
   const FavouriteDataHolder({super.key, required this.index});
 
   final int index;
+
+  @override
+  State<FavouriteDataHolder> createState() => _FavouriteDataHolderState();
+}
+
+class _FavouriteDataHolderState extends State<FavouriteDataHolder> {
+  bool isClicked = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BookingScreen(index: index)),
+          MaterialPageRoute(
+            builder: (context) => BookingScreen(index: widget.index),
+          ),
         );
       },
       child: Container(
@@ -42,7 +51,7 @@ class FavouriteDataHolder extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2.r),
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageUrl: AppData.popularImagesPath[index],
+                  imageUrl: AppData.popularImagesPath[widget.index],
                 ),
               ),
             ),
@@ -58,7 +67,7 @@ class FavouriteDataHolder extends StatelessWidget {
                       Expanded(
                         child: SizedBox(
                           child: primaryText(
-                            text: AppData.serviceName[index],
+                            text: AppData.serviceName[widget.index],
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             fontSize: 16.sp, // Reduced font size
@@ -83,7 +92,7 @@ class FavouriteDataHolder extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: secondaryText(
-                      text: AppData.serviceProviderName[index],
+                      text: AppData.serviceProviderName[widget.index],
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
@@ -101,7 +110,7 @@ class FavouriteDataHolder extends StatelessWidget {
                           child: Row(
                             children: [
                               primaryText(
-                                text: '\$${AppData.price[index]}',
+                                text: '\$${AppData.price[widget.index]}',
                                 fontSize: 13.sp,
                               ),
                               secondaryText(text: '/hour', fontSize: 12.sp),
@@ -110,13 +119,26 @@ class FavouriteDataHolder extends StatelessWidget {
                         ),
 
                         // Favorite icon with fixed size
-                        Container(
-                          width: 20.w,
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 18.sp,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isClicked = !isClicked;
+                            });
+                          },
+                          child: Container(
+                            width: 20.w,
+                            alignment: Alignment.centerRight,
+                            child: isClicked
+                                ? Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                    size: 18.sp,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.black,
+                                    size: 18.sp,
+                                  ),
                           ),
                         ),
                       ],

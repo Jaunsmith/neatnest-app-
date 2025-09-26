@@ -38,32 +38,31 @@ class _FavoriteScreenState extends State<FavoriteScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: primaryText(text: 'Favorite'),
-          leading: Consumer(
-            builder: (context, ref, _) {
-              return AppBarIcon(
-                icons: Icons.arrow_back,
-                function: () {
-                  ref.read(bottomNavNotifiersProvider.notifier).indexUpdate(0);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BottomNavigationScreen(),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+        title: primaryText(text: 'Favorite'),
+        leading: Consumer(
+          builder: (context, ref, _) {
+            return AppBarIcon(
+              icons: Icons.arrow_back,
+              function: () {
+                ref.read(bottomNavNotifiersProvider.notifier).indexUpdate(0);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BottomNavigationScreen(),
+                  ),
+                );
+              },
+            );
+          },
         ),
-        body: Column(
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             20.ht,

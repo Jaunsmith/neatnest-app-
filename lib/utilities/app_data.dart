@@ -91,4 +91,11 @@ class AppData {
       datetime: DateTime.now().subtract(Duration(days: 10)),
     ),
   ];
+  static List<String> ratingTextRange = [
+    "5.0",
+    "4.0 - 4.9",
+    "3.0 - 3.9",
+    "2.0 - 2.9",
+    "1.0 - 1.9",
+  ];
 }

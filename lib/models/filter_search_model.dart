@@ -3,7 +3,7 @@ class FilterSearchModel {
   final String? category;
   final double? minPrice;
   final double? maxPrice;
-  final double? rating;
+  final String? rating;
 
   FilterSearchModel({
     this.location,
@@ -20,7 +20,7 @@ class FilterSearchModel {
     String? category,
     double? maxPrice,
     double? minPrice,
-    double? rating,
+    String? rating,
   }) {
     return FilterSearchModel(
       location: location ?? this.location,

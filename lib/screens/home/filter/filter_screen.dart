@@ -9,6 +9,7 @@ import 'package:neat_nest/screens/home/filter/widget/filter_rating.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 
+import '../../../utilities/app_data.dart';
 import '../../../utilities/constant/colors.dart';
 import '../../../widget/app_text.dart';
 import '../../history/utilities/app_bar_icon.dart';
@@ -30,6 +31,9 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
 
   final FilterSearchController _filterSearchController =
       FilterSearchController();
+
+  late int categoryIndex = -1;
+  late int ratingIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +96,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    return CategoryPageView(index: index);
+                    final isClicked = categoryIndex == index;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          categoryIndex = index;
+                        });
+                        ref
+                            .read(filterStateProvider.notifier)
+                            .setCategory(AppData.serviceName[index]);
+                      },
+                      child: CategoryPageView(
+                        index: index,
+                        clickedItem: isClicked,
+                      ),
+                    );
                   },
                 ),
               ),
@@ -100,9 +118,6 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
               primaryText(text: "Price Range"),
               5.ht,
               FilterRange(),
-              // primaryText(text: "Available Date"),
-              // 5.ht,
-              // DateSelector(initialDate: DateTime.now()),
               10.ht,
               primaryText(text: "Ratings"),
               10.ht,
@@ -112,7 +127,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return FilterRating(index: index);
+                    final ratingClicked = ratingIndex == index;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          ratingIndex = index;
+                        });
+                        ref
+                            .read(filterStateProvider.notifier)
+                            .setRating(AppData.ratingTextRange[index]);
+                      },
+                      child: FilterRating(
+                        index: index,
+                        ratingClicked: ratingClicked,
+                      ),
+                    );
                   },
                 ),
               ),
@@ -127,6 +156,10 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                     textColor: Colors.black,
                     verticalHeight: 12.h,
                     function: () {
+                      setState(() {
+                        categoryIndex = _filterSearchController.resetIndex();
+                        ratingIndex = _filterSearchController.resetIndex();
+                      });
                       ref.read(filterStateProvider.notifier).reset();
                     },
                   ),
@@ -137,7 +170,11 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                     textColor: Colors.white,
                     verticalHeight: 12.h,
                     function: () {
-                      _filterSearchController.submit();
+                      _filterSearchController.submit(ref);
+                      setState(() {
+                        categoryIndex = _filterSearchController.resetIndex();
+                        ratingIndex = _filterSearchController.resetIndex();
+                      });
                     },
                   ),
                 ],
