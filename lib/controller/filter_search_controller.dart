@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neat_nest/screens/home/filter/notifier/filter_state.dart';
+import 'package:neat_nest/screens/home/filter/widget/filter_result_screen.dart';
+import 'package:neat_nest/widget/error_notification.dart';
+import 'package:neat_nest/widget/loading_screen.dart';
 
 class FilterSearchController {
   FilterSearchController();
@@ -8,7 +12,8 @@ class FilterSearchController {
     return -1;
   }
 
-  void submit(WidgetRef ref) {
+  void submit(WidgetRef ref, BuildContext context) {
+    final navigate = Navigator.of(context);
     String? category;
     String? location;
     String? rating;
@@ -21,10 +26,26 @@ class FilterSearchController {
     maxPrice = update?.maxPrice;
     rating = update?.rating;
 
-    print(
-      '$category $rating $location ${minPrice?.toInt().round()} ${maxPrice?.toInt().round()} ',
-    );
+    if (category == null &&
+        minPrice == null &&
+        maxPrice == null &&
+        location == null &&
+        rating == null) {
+      showErrorMessage(context, "All filter field can't be empty");
+    } else {
+      navigate.push(MaterialPageRoute(builder: (_) => LoadingScreen()));
 
-    ref.read(filterStateProvider.notifier).reset();
+      print(
+        '$category $rating $location ${minPrice?.toInt().round()} ${maxPrice?.toInt().round()} ',
+      );
+
+      Future.delayed(Duration(milliseconds: 500), () {
+        navigate.pushReplacement(
+          MaterialPageRoute(builder: (_) => FilterResultScreen()),
+        );
+      });
+
+      ref.read(filterStateProvider.notifier).reset();
+    }
   }
 }

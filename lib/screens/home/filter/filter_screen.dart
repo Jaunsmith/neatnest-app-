@@ -38,22 +38,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     final filterState = ref.watch(filterStateProvider);
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: primaryText(text: 'Filter'),
-          leading: AppBarIcon(
-            icons: Icons.arrow_back,
-            function: () {
-              Navigator.pop(context);
-            },
-          ),
+        title: primaryText(text: 'Filter'),
+        leading: AppBarIcon(
+          icons: Icons.arrow_back,
+          function: () {
+            Navigator.pop(context);
+          },
         ),
-        body: SingleChildScrollView(
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -170,7 +169,7 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                     textColor: Colors.white,
                     verticalHeight: 12.h,
                     function: () {
-                      _filterSearchController.submit(ref);
+                      _filterSearchController.submit(ref, context);
                       setState(() {
                         categoryIndex = _filterSearchController.resetIndex();
                         ratingIndex = _filterSearchController.resetIndex();

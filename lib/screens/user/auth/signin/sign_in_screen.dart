@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/controller/sign_in_controller.dart';
 import 'package:neat_nest/screens/user/auth/icon_holder.dart';
-import 'package:neat_nest/screens/user/auth/signin/forget_password_screen.dart';
+import 'package:neat_nest/screens/user/auth/signin/utilities/forget_password_screen.dart';
 import 'package:neat_nest/screens/user/auth/signup/sign_up_screen.dart';
 import 'package:neat_nest/screens/user/utilities/auth_text_filed.dart';
 import 'package:neat_nest/utilities/app_button.dart';
@@ -81,9 +81,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "This field cannot be empty";
-                      }
-                      if (value.length < 8) {
-                        return "Your password cannot be less than 8";
                       }
                       return null;
                     },

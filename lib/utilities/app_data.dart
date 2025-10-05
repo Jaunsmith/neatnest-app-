@@ -27,13 +27,15 @@ class AppData {
     'Owovickky',
     'James',
     'Rodgriguez',
+    "Aina",
   ];
   static const List<String> serviceName = [
     'Home Cleaning',
     'Repairing',
     'Garden Clearing',
+    "Office Cleaning",
   ];
-  static const List<double> price = [1700, 500, 960];
+  static const List<double> price = [1700, 500, 960, 1300];
   static const List<IntroductionScreens> introScreens = [
     IntroductionScreens(
       bigText: 'Professional Home Help, Right when you need it',

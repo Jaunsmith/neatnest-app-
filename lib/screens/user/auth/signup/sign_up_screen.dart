@@ -57,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  10.ht,
+                  8.ht,
                   AuthTextFiled(
                     titleText: 'Name',
                     hintText: 'Enter Full Name',
@@ -72,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  10.ht,
+                  8.ht,
                   AuthTextFiled(
                     titleText: 'Email Address',
                     hintText: 'Enter Email Address',
@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  10.ht,
+                  8.ht,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -96,13 +96,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Container(
                         padding: EdgeInsets.symmetric(
                           vertical: 5.h,
-                          horizontal: 10.w,
+                          horizontal: 8.w,
                         ),
                         decoration: BoxDecoration(
                           color: AppColors.textFieldBckColor.withValues(
                             alpha: 0.3,
                           ),
-                          borderRadius: BorderRadius.circular(10.r),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: DropdownButton(
                           hint: secondaryText(text: "Select Role"),
@@ -128,7 +128,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  10.ht,
+                  8.ht,
+                  AuthTextFiled(
+                    titleText: 'UserName',
+                    hintText: 'Enter UserName',
+                    textEditingController: _signUpController.userNameController,
+                    onChanged: (val) {
+                      setState(() {
+                        onChange = val;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "You need to enter Name";
+                      }
+                      if (value.length < 3) {
+                        return "Password must be more than 3 character";
+                      }
+                      return null;
+                    },
+                  ),
+                  8.ht,
                   AuthTextFiled(
                     titleText: 'Password',
                     hintText: 'Enter Password',
@@ -149,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  10.ht,
+                  8.ht,
                   AuthTextFiled(
                     titleText: 'Confirm Password',
                     hintText: 'Confirm Password',
@@ -166,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  10.ht,
+                  8.ht,
                   Row(
                     children: [
                       Checkbox(
@@ -192,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  20.ht,
+                  10.ht,
                   AppButton(
                     text: 'Submit',
                     bckColor: AppColors.primaryColor,
@@ -205,9 +225,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                     },
                   ),
-                  30.ht,
+                  10.ht,
                   DottedLine(dashColor: AppColors.secondaryTextColor),
-                  20.ht,
+                  15.ht,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -222,7 +242,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
-                  30.ht,
+                  10.ht,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

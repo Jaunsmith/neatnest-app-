@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
 import 'package:neat_nest/screens/user/widgets/row_data_holder.dart';
+import 'package:neat_nest/screens/user/widgets/worker_verification_screen.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 
@@ -13,6 +14,8 @@ import '../../widget/app_text.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
+
+  final String role = "Worker";
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +65,15 @@ class UserProfileScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    primaryText(text: 'Oladiti Yusuf'),
-                    secondaryText(text: 'oladiti1@gmail.com'),
+                    primaryText(text: AppData.serviceProviderName[1]),
+                    secondaryText(text: 'username'),
                   ],
                 ),
               ],
             ),
             30.ht,
             DottedLine(
-              dashColor: AppColors.secondaryTextColor.withOpacity(0.5),
+              dashColor: AppColors.secondaryTextColor.withValues(alpha: .5),
             ),
             30.ht,
             RowDataHolder(
@@ -86,13 +89,24 @@ class UserProfileScreen extends StatelessWidget {
             ),
             20.ht,
             RowDataHolder(
-              text: 'Payment Methods',
+              text: role == "Worker" ? "Verification" : 'Payment Methods',
               icons: FontAwesomeIcons.creditCard,
-              function: () {},
+              function: () {
+                if (role == "Worker") {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WorkerVerificationScreen(),
+                    ),
+                  );
+                } else {
+                  print("This is user profile");
+                }
+              },
             ),
             20.ht,
             RowDataHolder(
-              text: 'My booking',
+              text: role == "Worker" ? "My Account Summary" : 'My booking',
               icons: Icons.calendar_month_outlined,
               function: () {},
             ),

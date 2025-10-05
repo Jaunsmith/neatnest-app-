@@ -9,7 +9,7 @@ class SignUpController {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
 
   bool isChecked = false;
   String? role;
@@ -27,12 +27,13 @@ class SignUpController {
     final String password;
     final String confirmPassword;
     final String name;
-    final String address;
+    final String username;
 
     mail = emailController.text;
     password = passwordController.text;
     name = nameController.text;
     confirmPassword = confirmPasswordController.text;
+    username = userNameController.text;
 
     if (role == null || role!.isEmpty) {
       showErrorMessage(context, "Please kindly select a role ");

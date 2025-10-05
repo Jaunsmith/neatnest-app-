@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +21,15 @@ class FavouriteDataHolder extends StatefulWidget {
 
 class _FavouriteDataHolderState extends State<FavouriteDataHolder> {
   bool isClicked = false;
+
+  String randNumber() {
+    final rating = Random().nextDouble() * 5;
+    return rating.toStringAsFixed(1);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final str = randNumber();
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -82,7 +91,7 @@ class _FavouriteDataHolderState extends State<FavouriteDataHolder> {
                             size: 14.sp,
                           ),
                           3.wt,
-                          primaryText(text: '4.5', fontSize: 14.sp),
+                          primaryText(text: str, fontSize: 14.sp),
                         ],
                       ),
                     ],
