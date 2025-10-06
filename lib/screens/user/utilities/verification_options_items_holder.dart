@@ -12,14 +12,36 @@ class VerificationOptionsItemsHolder extends StatelessWidget {
     required this.subTitle,
     this.isClicked = false,
     required this.icons,
-    this.isVerified = false,
+    required this.textIn,
   });
 
   final bool isClicked;
   final String title;
   final String subTitle;
   final IconData icons;
-  final bool isVerified;
+  final String textIn;
+
+  IconData verification(String text) {
+    if (text == "cancel") {
+      return FontAwesomeIcons.xmark;
+    } else if (text == "pending") {
+      return FontAwesomeIcons.spinner;
+    } else {
+      return FontAwesomeIcons.check;
+    }
+  }
+
+  Color verificationColor(String text) {
+    if (text == "cancel") {
+      return Colors.red;
+    } else if (text == "pending") {
+      return Colors.orange;
+    } else if (text == "completed") {
+      return AppColors.primaryColor;
+    } else {
+      return Colors.transparent;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +92,11 @@ class VerificationOptionsItemsHolder extends StatelessWidget {
             width: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: isVerified ? AppColors.primaryColor : Colors.red,
+              color: verificationColor(textIn),
             ),
             child: Center(
               child: Icon(
-                isVerified ? FontAwesomeIcons.check : FontAwesomeIcons.xmark,
+                verification(textIn),
                 color: Colors.white,
                 size: 20.sp,
               ),

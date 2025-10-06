@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neat_nest/screens/user/utilities/verification_options_items_holder.dart';
+import 'package:neat_nest/screens/user/widgets/verification_picker_screen.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
@@ -33,7 +34,7 @@ class _VerificationMethodScreenState extends State<VerificationMethodScreen> {
     FontAwesomeIcons.cameraRotate,
   ];
 
-  List<bool> verify = [true, false, true];
+  List<String> verify = ["completed", "pending", "cancel"];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _VerificationMethodScreenState extends State<VerificationMethodScreen> {
         10.ht,
         secondaryText(
           text:
-              "Kindly Kick start your verification, below is the verifcation required ",
+              "Kindly Kick start your verification, below is the verification required ",
         ),
         20.ht,
         Expanded(
@@ -56,13 +57,19 @@ class _VerificationMethodScreenState extends State<VerificationMethodScreen> {
                   setState(() {
                     indent = index;
                   });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => VerificationPickerScreen(),
+                    ),
+                  );
                 },
                 child: VerificationOptionsItemsHolder(
                   title: title[index],
                   subTitle: subTitle[index],
                   icons: icons[index],
                   isClicked: yes,
-                  isVerified: verify[index],
+                  textIn: verify[index],
                 ),
               );
             },

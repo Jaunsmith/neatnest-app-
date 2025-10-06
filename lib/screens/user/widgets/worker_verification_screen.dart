@@ -52,7 +52,11 @@ class _WorkerVerificationScreenState extends State<WorkerVerificationScreen> {
                 textColor: Colors.white,
                 function: () {
                   setState(() {
-                    index++;
+                    if (index < pages.length - 1) {
+                      index++;
+                    } else {
+                      index = 0;
+                    }
                   });
                 },
               ),

@@ -90,7 +90,9 @@ class UserProfileScreen extends StatelessWidget {
             20.ht,
             RowDataHolder(
               text: role == "Worker" ? "Verification" : 'Payment Methods',
-              icons: FontAwesomeIcons.creditCard,
+              icons: role == "Worker"
+                  ? FontAwesomeIcons.addressCard
+                  : FontAwesomeIcons.creditCard,
               function: () {
                 if (role == "Worker") {
                   Navigator.push(
