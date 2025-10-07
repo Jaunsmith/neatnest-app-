@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neat_nest/screens/user/notifiers/data_flow_state.dart';
+import 'package:neat_nest/screens/user/notifiers/on_submit_index.dart';
+import 'package:neat_nest/screens/user/widgets/worker_verification_screen.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
@@ -41,6 +43,8 @@ class _IdUploadScreenState extends ConsumerState<IdUploadScreen> {
     ["Utility Bills", "Bank Statement"],
     ["selfie"],
   ];
+
+  List<String> testing = ["Aina", "Deji"];
 
   Future<File?> _compressImage(File file) async {
     try {
@@ -348,23 +352,39 @@ class _IdUploadScreenState extends ConsumerState<IdUploadScreen> {
                 textColor: Colors.white,
                 function: () {
                   if (isSelfie) {
-                    // Selfie only needs front image
                     if (selectedFront == null) {
                       showErrorMessage(context, "Kindly take a selfie");
                     } else {
-                      // Proceed with selfie upload
-                      print("Selfie uploaded successfully");
+                      ref
+                          .read(dataFlowStateProvider.notifier)
+                          .updateVerificationStatus(methodIndex, "Pending");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => WorkerVerificationScreen(index: 1),
+                        ),
+                      );
                     }
                   } else {
-                    // Documents need both front and back
                     if (selectedFront == null || selectedBack == null) {
                       showErrorMessage(
                         context,
                         "Kindly Upload both the front and back of your $documentType",
                       );
                     } else {
-                      // Proceed with document upload
+                      ref
+                          .read(onSubmitIndexProvider.notifier)
+                          .updateOnSubmitIndex(methodIndex);
+                      ref
+                          .read(dataFlowStateProvider.notifier)
+                          .updateVerificationStatus(methodIndex, "Pending");
                       print("$documentType uploaded successfully");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => WorkerVerificationScreen(index: 1),
+                        ),
+                      );
                     }
                   }
                 },

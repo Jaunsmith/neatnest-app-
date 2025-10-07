@@ -7,6 +7,7 @@ import 'package:neat_nest/screens/user/widgets/Id_upload_screen.dart';
 import 'package:neat_nest/screens/user/widgets/verification_picker_screen.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
+import 'package:neat_nest/widget/error_notification.dart';
 
 class VerificationMethodScreen extends ConsumerStatefulWidget {
   const VerificationMethodScreen({super.key});
@@ -36,8 +37,6 @@ class _VerificationMethodScreenState
     FontAwesomeIcons.cameraRotate,
   ];
 
-  List<String> verify = ["completed", "pending", "cancel"];
-
   @override
   Widget build(BuildContext context) {
     final indent = ref.watch(dataFlowStateProvider);
@@ -56,30 +55,39 @@ class _VerificationMethodScreenState
             itemCount: 3,
             itemBuilder: (context, index) {
               final yes = indent[0].methodVerifyIndex == index;
+              final verificationStatus = indent[index].verificationStatus;
               return GestureDetector(
-                onTap: () {
-                  ref
-                      .read(dataFlowStateProvider.notifier)
-                      .updateMethodIndex(index);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) {
-                        if (index < title.length - 1) {
-                          return VerificationPickerScreen();
-                        } else {
-                          return IdUploadScreen();
-                        }
+                onTap: verificationStatus == "Pending"
+                    ? () {
+                        showErrorMessage(
+                          context,
+                          "Your data is under verification",
+                        );
+                      }
+                    : () {
+                        ref
+                            .read(dataFlowStateProvider.notifier)
+                            .updateMethodIndex(index);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              if (index < title.length - 1) {
+                                return VerificationPickerScreen();
+                              } else {
+                                return IdUploadScreen();
+                              }
+                            },
+                          ),
+                        );
                       },
-                    ),
-                  );
-                },
                 child: VerificationOptionsItemsHolder(
                   title: title[index],
                   subTitle: subTitle[index],
                   icons: icons[index],
                   isClicked: yes,
-                  textIn: verify[index],
+                  textIn: verificationStatus,
                 ),
               );
             },

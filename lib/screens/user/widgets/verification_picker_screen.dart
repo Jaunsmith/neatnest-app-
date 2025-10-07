@@ -22,7 +22,6 @@ class VerificationPickerScreen extends ConsumerStatefulWidget {
 
 class _VerificationPickerScreenState
     extends ConsumerState<VerificationPickerScreen> {
-  // List<String> title = ["Passport", "ID Card", "Driver Licence"];
   List<String> appBarTitle = [
     "ID Card Verification",
     "Address Verification",
@@ -46,6 +45,7 @@ class _VerificationPickerScreenState
   List<String> header = [
     "Please choose the ID Card means you'd like to use to verify your identity. ",
     "Please choose the Address Verification means you'd like to use to verify your Address. ",
+    "",
   ];
 
   @override
@@ -100,8 +100,8 @@ class _VerificationPickerScreenState
                             title: title[methodeScreenIndex][index],
                             subTitle: subTitle[index],
                             icons: icons[index],
-                            textIn: '',
                             isClicked: yes,
+                            textIn: "",
                           ),
                         );
                       },

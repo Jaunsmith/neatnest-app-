@@ -9,7 +9,8 @@ import '../../../widget/app_text.dart';
 import '../../history/utilities/app_bar_icon.dart';
 
 class WorkerVerificationScreen extends StatefulWidget {
-  const WorkerVerificationScreen({super.key});
+  const WorkerVerificationScreen({super.key, this.index = 0});
+  final int index;
 
   @override
   State<WorkerVerificationScreen> createState() =>
@@ -17,11 +18,11 @@ class WorkerVerificationScreen extends StatefulWidget {
 }
 
 class _WorkerVerificationScreenState extends State<WorkerVerificationScreen> {
-  late int index = 0;
+  late int index = widget.index;
 
   List<Widget> pages = [VerificationStartScreen(), VerificationMethodScreen()];
 
-  List<String> buttonText = ["Start", "Continue", "Continue"];
+  List<String> buttonText = ["Start", "Continue"];
 
   @override
   Widget build(BuildContext context) {

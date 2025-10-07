@@ -12,34 +12,49 @@ class VerificationOptionsItemsHolder extends StatelessWidget {
     required this.subTitle,
     this.isClicked = false,
     required this.icons,
-    required this.textIn,
+    this.textIn,
   });
 
   final bool isClicked;
   final String title;
   final String subTitle;
   final IconData icons;
-  final String textIn;
+  final String? textIn;
 
-  IconData verification(String text) {
-    if (text == "cancel") {
-      return FontAwesomeIcons.xmark;
-    } else if (text == "pending") {
-      return FontAwesomeIcons.spinner;
-    } else {
-      return FontAwesomeIcons.check;
+  final List<String> verify = const [
+    "Not-started",
+    "Completed",
+    "Pending",
+    "Cancel",
+  ];
+
+  IconData? verification(String text) {
+    switch (text) {
+      case "Cancel":
+        return FontAwesomeIcons.xmark;
+      case "Pending":
+        return FontAwesomeIcons.spinner;
+      case "Completed":
+        return FontAwesomeIcons.check;
+      case "Not-started":
+        return FontAwesomeIcons.clock;
+      default:
+        return null;
     }
   }
 
-  Color verificationColor(String text) {
-    if (text == "cancel") {
-      return Colors.red;
-    } else if (text == "pending") {
-      return Colors.orange;
-    } else if (text == "completed") {
-      return AppColors.primaryColor;
-    } else {
-      return Colors.transparent;
+  Color? verificationColor(String text) {
+    switch (text) {
+      case "Cancel":
+        return Colors.red;
+      case "Pending":
+        return Colors.orange;
+      case "Completed":
+        return AppColors.primaryColor;
+      case "Not-started":
+        return Colors.grey;
+      default:
+        return null;
     }
   }
 
@@ -92,11 +107,11 @@ class VerificationOptionsItemsHolder extends StatelessWidget {
             width: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: verificationColor(textIn),
+              color: verificationColor(textIn ?? verify[0]),
             ),
             child: Center(
               child: Icon(
-                verification(textIn),
+                verification(textIn ?? verify[0]),
                 color: Colors.white,
                 size: 20.sp,
               ),
