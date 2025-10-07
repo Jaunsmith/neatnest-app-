@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:neat_nest/screens/user/notifiers/data_flow_state.dart';
 import 'package:neat_nest/screens/user/utilities/verification_options_items_holder.dart';
 import 'package:neat_nest/screens/user/widgets/Id_upload_screen.dart';
 import 'package:neat_nest/utilities/app_button.dart';
@@ -10,18 +12,27 @@ import 'package:neat_nest/utilities/constant/extension.dart';
 import '../../../widget/app_text.dart';
 import '../../history/utilities/app_bar_icon.dart';
 
-class VerificationPickerScreen extends StatefulWidget {
+class VerificationPickerScreen extends ConsumerStatefulWidget {
   const VerificationPickerScreen({super.key});
 
   @override
-  State<VerificationPickerScreen> createState() =>
+  ConsumerState<VerificationPickerScreen> createState() =>
       _VerificationPickerScreenState();
 }
 
-class _VerificationPickerScreenState extends State<VerificationPickerScreen> {
-  late int indent = 0;
-
-  List<String> title = ["Passport", "ID Card", "Driver Licence"];
+class _VerificationPickerScreenState
+    extends ConsumerState<VerificationPickerScreen> {
+  // List<String> title = ["Passport", "ID Card", "Driver Licence"];
+  List<String> appBarTitle = [
+    "ID Card Verification",
+    "Address Verification",
+    "Selfie Verification",
+  ];
+  List<List<String>> title = [
+    ["Passport", "ID Card", "Driver Licence"],
+    ["Utility Bills", "Official Bank Statement"],
+    ["selfie", "selfie"],
+  ];
   List<String> subTitle = [
     "International Passport",
     "NIN or Any Valid Id card",
@@ -32,14 +43,21 @@ class _VerificationPickerScreenState extends State<VerificationPickerScreen> {
     FontAwesomeIcons.idCard,
     FontAwesomeIcons.idCard,
   ];
+  List<String> header = [
+    "Please choose the ID Card means you'd like to use to verify your identity. ",
+    "Please choose the Address Verification means you'd like to use to verify your Address. ",
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final methodScreen = ref.watch(dataFlowStateProvider);
+    final methodeScreenIndex = methodScreen[0].methodVerifyIndex;
+    final identityScreenIndex = methodScreen[0].identityVerifyIndex;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: primaryText(text: 'ID Card Verification'),
+        title: primaryText(text: appBarTitle[methodeScreenIndex]),
         leading: AppBarIcon(
           icons: Icons.arrow_back,
           function: () {
@@ -57,29 +75,29 @@ class _VerificationPickerScreenState extends State<VerificationPickerScreen> {
                 children: [
                   10.ht,
                   secondaryText(
-                    text:
-                        "Please choose the ID Card means you'd like to use to verify your identity. ",
+                    text: header[methodeScreenIndex],
+                    color: Colors.red,
                   ),
                   20.ht,
                   Expanded(
                     child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: title[methodeScreenIndex].length,
                       itemBuilder: (context, index) {
-                        final yes = indent == index;
+                        final yes = identityScreenIndex == index;
                         return GestureDetector(
                           onTap: () {
-                            setState(() {
-                              indent = index;
-                            });
+                            ref
+                                .read(dataFlowStateProvider.notifier)
+                                .updateIdentityIndex(index);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => IdUploadScreen(index: index),
+                                builder: (_) => IdUploadScreen(),
                               ),
                             );
                           },
                           child: VerificationOptionsItemsHolder(
-                            title: title[index],
+                            title: title[methodeScreenIndex][index],
                             subTitle: subTitle[index],
                             icons: icons[index],
                             textIn: '',
