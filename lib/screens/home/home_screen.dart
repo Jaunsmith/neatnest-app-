@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:neat_nest/screens/home/filter/filter_screen.dart';
 import 'package:neat_nest/screens/home/utilities/home_screen_index_state.dart';
 import 'package:neat_nest/screens/home/widget/home_screen_icons.dart';
-import 'package:neat_nest/screens/home/widget/notification_screen.dart';
 import 'package:neat_nest/screens/home/widget/popula_service_images.dart';
 import 'package:neat_nest/utilities/app_data.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
+import 'package:neat_nest/utilities/route/app_naviation_helper.dart';
+import 'package:neat_nest/utilities/route/app_route_names.dart';
 import 'package:neat_nest/widget/app_text.dart';
 import 'package:neat_nest/widget/app_text_field.dart';
 
@@ -110,12 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationScreen(),
-                        ),
-                      );
+                      AppNavigatorHelper.push(context, AppRoute.notification);
                     },
                     child: Stack(
                       children: [
@@ -150,10 +145,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 iconPrefix: Icons.search,
                 iconSuffix: Icons.menu,
                 function: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => FilterScreen()),
-                  );
+                  AppNavigatorHelper.push(context, AppRoute.filterData);
+                  ;
                 },
               ),
               10.ht,
@@ -242,6 +235,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             fontSize: 18.sp,
                           ),
                           GestureDetector(
+                            onTap: () {},
                             child: secondaryText(
                               text: 'view all',
                               color: AppColors.primaryColor,

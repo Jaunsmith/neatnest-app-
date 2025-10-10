@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 
-import '../../../widget/app_text.dart';
+import '../../../../../widget/app_text.dart';
 
 class VerificationStartScreen extends StatelessWidget {
   const VerificationStartScreen({super.key});

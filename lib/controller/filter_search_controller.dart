@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neat_nest/screens/home/filter/notifier/filter_state.dart';
 import 'package:neat_nest/screens/home/filter/widget/filter_result_screen.dart';
-import 'package:neat_nest/widget/error_notification.dart';
 import 'package:neat_nest/widget/loading_screen.dart';
+import 'package:neat_nest/widget/notificaiton_content.dart';
 
 class FilterSearchController {
   FilterSearchController();
@@ -31,7 +31,10 @@ class FilterSearchController {
         maxPrice == null &&
         location == null &&
         rating == null) {
-      showErrorMessage(context, "All filter field can't be empty");
+      showErrorNotification(
+        context: context,
+        message: "All filter field can't be empty",
+      );
     } else {
       navigate.push(MaterialPageRoute(builder: (_) => LoadingScreen()));
 

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neat_nest/screens/user/widgets/verification_method_screen.dart';
-import 'package:neat_nest/screens/user/widgets/verification_start_screen.dart';
+import 'package:neat_nest/screens/user/widgets/verification/widget/verification_method_screen.dart';
+import 'package:neat_nest/screens/user/widgets/verification/widget/verification_start_screen.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
-
-import '../../../widget/app_text.dart';
-import '../../history/utilities/app_bar_icon.dart';
+import 'package:neat_nest/widget/app_bar_holder.dart';
 
 class WorkerVerificationScreen extends StatefulWidget {
   const WorkerVerificationScreen({super.key, this.index = 0});
@@ -28,16 +26,7 @@ class _WorkerVerificationScreenState extends State<WorkerVerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: primaryText(text: 'Identity Verification'),
-        leading: AppBarIcon(
-          icons: Icons.arrow_back,
-          function: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: AppBarHolder(title: "Identity Verification"),
       body: SafeArea(
         child: Stack(
           children: [

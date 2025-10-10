@@ -5,11 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:neat_nest/controller/sign_up_controller.dart';
 import 'package:neat_nest/screens/user/auth/icon_holder.dart';
-import 'package:neat_nest/screens/user/auth/signin/sign_in_screen.dart';
 import 'package:neat_nest/screens/user/utilities/auth_text_filed.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
+import 'package:neat_nest/utilities/route/app_naviation_helper.dart';
+import 'package:neat_nest/utilities/route/app_route_names.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -249,12 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       secondaryText(text: 'Already have an account?'),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInScreen(),
-                            ),
-                          );
+                          AppNavigatorHelper.push(context, AppRoute.signIn);
                         },
                         child: secondaryText(
                           text: 'SignIn',

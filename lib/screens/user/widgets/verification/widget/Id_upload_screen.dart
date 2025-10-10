@@ -9,15 +9,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neat_nest/screens/user/notifiers/data_flow_state.dart';
 import 'package:neat_nest/screens/user/notifiers/on_submit_index.dart';
-import 'package:neat_nest/screens/user/widgets/worker_verification_screen.dart';
+import 'package:neat_nest/screens/user/widgets/verification/worker_verification_screen.dart';
 import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
-import 'package:neat_nest/widget/error_notification.dart';
+import 'package:neat_nest/widget/notificaiton_content.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../widget/app_text.dart';
-import '../../history/utilities/app_bar_icon.dart';
+import '../../../../../widget/app_text.dart';
+import '../../../../history/utilities/app_bar_icon.dart';
 
 class IdUploadScreen extends ConsumerStatefulWidget {
   const IdUploadScreen({super.key});
@@ -353,7 +353,10 @@ class _IdUploadScreenState extends ConsumerState<IdUploadScreen> {
                 function: () {
                   if (isSelfie) {
                     if (selectedFront == null) {
-                      showErrorMessage(context, "Kindly take a selfie");
+                      showErrorNotification(
+                        context: context,
+                        message: "Kindly take a selfie",
+                      );
                     } else {
                       ref
                           .read(dataFlowStateProvider.notifier)
@@ -367,9 +370,10 @@ class _IdUploadScreenState extends ConsumerState<IdUploadScreen> {
                     }
                   } else {
                     if (selectedFront == null || selectedBack == null) {
-                      showErrorMessage(
-                        context,
-                        "Kindly Upload both the front and back of your $documentType",
+                      showErrorNotification(
+                        context: context,
+                        message:
+                            "Kindly Upload both the front and back of your $documentType",
                       );
                     } else {
                       ref

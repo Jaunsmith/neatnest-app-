@@ -3,11 +3,12 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
 import 'package:neat_nest/screens/user/widgets/row_data_holder.dart';
-import 'package:neat_nest/screens/user/widgets/worker_verification_screen.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
+import 'package:neat_nest/utilities/route/app_naviation_helper.dart';
+import 'package:neat_nest/utilities/route/app_route_names.dart';
+import 'package:neat_nest/widget/app_bar_holder.dart';
 
 import '../../utilities/app_data.dart';
 import '../../widget/app_text.dart';
@@ -19,24 +20,16 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: primaryText(text: 'Profile'),
-          leading: GestureDetector(
-            child: AppBarIcon(
-              icons: Icons.arrow_back,
-              function: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ),
-        body: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBarHolder(
+        title: 'Profile',
+        function: () =>
+            AppNavigatorHelper.go(context, AppRoute.bottomNavigation),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             30.ht,
@@ -79,7 +72,9 @@ class UserProfileScreen extends StatelessWidget {
             RowDataHolder(
               text: 'Edit Profile ',
               icons: FontAwesomeIcons.pencil,
-              function: () {},
+              function: () {
+                AppNavigatorHelper.push(context, AppRoute.editProfile);
+              },
             ),
             20.ht,
             RowDataHolder(
@@ -95,11 +90,9 @@ class UserProfileScreen extends StatelessWidget {
                   : FontAwesomeIcons.creditCard,
               function: () {
                 if (role == "Worker") {
-                  Navigator.push(
+                  AppNavigatorHelper.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => WorkerVerificationScreen(),
-                    ),
+                    AppRoute.workerVerificationScreen,
                   );
                 } else {
                   print("This is user profile");

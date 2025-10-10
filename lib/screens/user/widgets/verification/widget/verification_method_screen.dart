@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:neat_nest/screens/user/notifiers/data_flow_state.dart';
 import 'package:neat_nest/screens/user/utilities/verification_options_items_holder.dart';
-import 'package:neat_nest/screens/user/widgets/Id_upload_screen.dart';
-import 'package:neat_nest/screens/user/widgets/verification_picker_screen.dart';
+import 'package:neat_nest/screens/user/widgets/verification/widget/Id_upload_screen.dart';
+import 'package:neat_nest/screens/user/widgets/verification/widget/verification_picker_screen.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
 import 'package:neat_nest/widget/app_text.dart';
-import 'package:neat_nest/widget/error_notification.dart';
+import 'package:neat_nest/widget/notificaiton_content.dart';
 
 class VerificationMethodScreen extends ConsumerStatefulWidget {
   const VerificationMethodScreen({super.key});
@@ -59,9 +59,9 @@ class _VerificationMethodScreenState
               return GestureDetector(
                 onTap: verificationStatus == "Pending"
                     ? () {
-                        showErrorMessage(
-                          context,
-                          "Your data is under verification",
+                        showErrorNotification(
+                          context: context,
+                          message: "Your data is under verification",
                         );
                       }
                     : () {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
-import 'package:neat_nest/widget/error_notification.dart';
+import 'package:neat_nest/widget/notificaiton_content.dart';
 
 class SignUpController {
   SignUpController();
@@ -36,9 +36,15 @@ class SignUpController {
     username = userNameController.text;
 
     if (role == null || role!.isEmpty) {
-      showErrorMessage(context, "Please kindly select a role ");
+      showErrorNotification(
+        context: context,
+        message: "Please kindly select a role ",
+      );
     } else if (!isChecked) {
-      showErrorMessage(context, "Please agree to the terms");
+      showErrorNotification(
+        context: context,
+        message: "Please agree to the terms",
+      );
     } else {
       Navigator.push(
         context,

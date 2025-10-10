@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:neat_nest/screens/booking/widgets/booking_form_screen.dart';
 import 'package:neat_nest/screens/booking/widgets/booking_review_holder.dart';
 import 'package:neat_nest/screens/history/utilities/app_bar_icon.dart';
 import 'package:neat_nest/screens/home/widget/home_screen_icons.dart';
@@ -9,6 +8,8 @@ import 'package:neat_nest/utilities/app_button.dart';
 import 'package:neat_nest/utilities/app_data.dart';
 import 'package:neat_nest/utilities/constant/colors.dart';
 import 'package:neat_nest/utilities/constant/extension.dart';
+import 'package:neat_nest/utilities/route/app_naviation_helper.dart';
+import 'package:neat_nest/utilities/route/app_route_names.dart';
 import 'package:neat_nest/widget/app_text.dart';
 
 class BookingScreen extends StatelessWidget {
@@ -40,7 +41,7 @@ class BookingScreen extends StatelessWidget {
               child: AppBarIcon(
                 icons: Icons.arrow_back,
                 function: () {
-                  Navigator.pop(context);
+                  AppNavigatorHelper.back(context);
                 },
               ),
             ),
@@ -202,11 +203,9 @@ class BookingScreen extends StatelessWidget {
                             textColor: Colors.white,
                             function: () {
                               debugPrint("Booking clicked");
-                              Navigator.push(
+                              AppNavigatorHelper.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => BookingFormScreen(),
-                                ),
+                                AppRoute.bookingFormScreen,
                               );
                             },
                           ),
