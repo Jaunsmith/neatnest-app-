@@ -27,7 +27,7 @@ class InRegScreen extends StatelessWidget {
           ),
           40.ht,
           AppButton(
-            text: 'Sign IN',
+            text: 'Sign In',
             bckColor: AppColors.primaryColor.withValues(alpha: .1),
             textColor: AppColors.primaryColor,
             function: () {
