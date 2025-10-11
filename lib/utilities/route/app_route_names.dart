@@ -11,6 +11,9 @@ enum AppRoute {
   filterData,
   bookingFormScreen,
   userProfile,
+  personalInfoEdit,
+  inReg,
+  userScreenLog,
 }
 
 extension AppRouteNamesExtension on AppRoute {
@@ -40,6 +43,12 @@ extension AppRouteNamesExtension on AppRoute {
         return "/bookingFormScreen";
       case AppRoute.userProfile:
         return "/userProfile";
+      case AppRoute.personalInfoEdit:
+        return "/personalInfoEdit";
+      case AppRoute.inReg:
+        return "/inReg";
+      case AppRoute.userScreenLog:
+        return "/userScreenLog";
     }
   }
 }

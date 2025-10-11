@@ -11,6 +11,7 @@ import 'package:neat_nest/utilities/constant/colors.dart';
 
 class BottomNavigationScreen extends ConsumerWidget {
   const BottomNavigationScreen({super.key, this.yesData = false});
+
   final bool yesData;
   List<Widget> get screens => [
     HomeScreen(),

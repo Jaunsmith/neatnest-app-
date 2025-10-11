@@ -3,19 +3,56 @@ import 'package:go_router/go_router.dart';
 import 'package:neat_nest/utilities/route/app_route_names.dart';
 
 class AppNavigatorHelper {
-  static void go(BuildContext context, AppRoute appRoute) {
-    context.go(appRoute.path);
+  // ✅ Go (replace the entire navigation stack)
+  static void go(
+    BuildContext context,
+    AppRoute appRoute, {
+    Map<String, String>? pathParameters,
+    Map<String, dynamic>? extra,
+    Map<String, String>? queryParameters,
+  }) {
+    context.goNamed(
+      appRoute.name,
+      pathParameters: pathParameters ?? {},
+      queryParameters: queryParameters ?? {},
+      extra: extra,
+    );
   }
 
-  static void push(BuildContext context, AppRoute appRoute) {
-    context.push(appRoute.path);
+  // ✅ Push (add new screen on top)
+  static void push(
+    BuildContext context,
+    AppRoute appRoute, {
+    Map<String, String>? pathParameters,
+    Map<String, dynamic>? extra,
+    Map<String, String>? queryParameters,
+  }) {
+    context.pushNamed(
+      appRoute.name,
+      pathParameters: pathParameters ?? {},
+      queryParameters: queryParameters ?? {},
+      extra: extra,
+    );
   }
 
+  // ✅ Replace (replace current screen)
+  static void replace(
+    BuildContext context,
+    AppRoute appRoute, {
+    Map<String, String>? pathParameters,
+    Map<String, dynamic>? extra,
+    Map<String, String>? queryParameters,
+  }) {
+    context.replaceNamed(
+      appRoute.name,
+      pathParameters: pathParameters ?? {},
+      queryParameters: queryParameters ?? {},
+      extra: extra,
+    );
+  }
+
+  // ✅ Go back
   static void back(BuildContext context) {
     context.pop();
-  }
-
-  static void replace(BuildContext context, AppRoute appRoute) {
-    context.replace(appRoute.path);
   }
 }

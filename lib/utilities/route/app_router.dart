@@ -8,7 +8,10 @@ import 'package:neat_nest/screens/user/auth/signin/sign_in_screen.dart';
 import 'package:neat_nest/screens/user/auth/signin/utilities/forget_password_screen.dart';
 import 'package:neat_nest/screens/user/auth/signup/sign_up_screen.dart';
 import 'package:neat_nest/screens/user/user_profile_screen.dart';
+import 'package:neat_nest/screens/user/user_screen.dart';
 import 'package:neat_nest/screens/user/widgets/edit_profile/edit_profile_screen.dart';
+import 'package:neat_nest/screens/user/widgets/edit_profile/widget/personal_info_edit.dart';
+import 'package:neat_nest/screens/user/widgets/in_reg_screen.dart';
 import 'package:neat_nest/screens/user/widgets/verification/worker_verification_screen.dart';
 import 'package:neat_nest/utilities/bottom_nav/bottom_navigation_screen.dart';
 import 'package:neat_nest/utilities/route/app_route_names.dart';
@@ -78,6 +81,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoute.userProfile.path,
         name: AppRoute.userProfile.name,
         builder: (context, state) => UserProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.personalInfoEdit.path,
+        name: AppRoute.personalInfoEdit.name,
+        builder: (context, state) => PersonalInfoEdit(),
+      ),
+      GoRoute(
+        path: AppRoute.inReg.path,
+        name: AppRoute.inReg.name,
+        builder: (context, state) => InRegScreen(),
+      ),
+      GoRoute(
+        path: AppRoute.userScreenLog.path,
+        name: AppRoute.userScreenLog.name,
+        builder: (context, state) {
+          final extraData = state.extra as Map<String, dynamic>?;
+          final isDataAvailable = extraData?['isDataAvailable'] ?? false;
+          return UserScreen(isDataAvailable: isDataAvailable);
+        },
       ),
     ],
   );

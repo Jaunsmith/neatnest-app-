@@ -18,6 +18,7 @@ class AuthTextFiled extends StatefulWidget {
     this.inputFormatter,
     this.onChanged,
     this.validator,
+    this.readOnly = false,
   });
 
   final String titleText;
@@ -30,6 +31,7 @@ class AuthTextFiled extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatter;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final bool readOnly;
 
   @override
   State<AuthTextFiled> createState() => _AuthTextFiledState();
@@ -47,6 +49,7 @@ class _AuthTextFiledState extends State<AuthTextFiled> {
         5.ht,
         TextFormField(
           controller: widget.textEditingController,
+          readOnly: widget.readOnly,
           keyboardType: widget.textInputType ?? TextInputType.multiline,
           maxLines: widget.maxLine,
           inputFormatters: widget.inputFormatter,

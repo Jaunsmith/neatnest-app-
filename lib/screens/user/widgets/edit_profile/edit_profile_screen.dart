@@ -22,8 +22,7 @@ class EditProfileScreen extends StatelessWidget {
       context: context,
       message: "Changes saved successfully",
     );
-    await Future.delayed(const Duration(seconds: 2));
-
+    await Future.delayed(Duration(seconds: 2));
     if (context.mounted) {
       AppNavigatorHelper.replace(context, AppRoute.userProfile);
     }
@@ -116,7 +115,12 @@ class EditProfileScreen extends StatelessWidget {
                     RowDataHolder(
                       text: 'Personal Information',
                       icons: Icons.person,
-                      function: () {},
+                      function: () {
+                        AppNavigatorHelper.push(
+                          context,
+                          AppRoute.personalInfoEdit,
+                        );
+                      },
                     ),
                     15.ht,
                     RowDataHolder(
